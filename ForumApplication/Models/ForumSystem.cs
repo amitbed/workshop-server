@@ -99,7 +99,17 @@ namespace ForumApplication.Models
             }
             return res;
         }
-        
+
+        public List<string> displayMembers()
+        {
+            List<string> mems = new List<string>();
+            foreach (string username in Members.Keys)
+            {
+                mems.Add(username);
+            }
+            return mems;
+        }
+
         public Member addMember(string username, string password, string email)
         {
             if ((String.IsNullOrEmpty(username)) || (String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(email)))
