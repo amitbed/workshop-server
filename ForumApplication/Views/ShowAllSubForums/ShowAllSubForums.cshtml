@@ -4,5 +4,21 @@
 
 <h2>ShowAllSubForums</h2>
 
+@{
+    string forum = (string)this.ViewContext.RouteData.Values["id"];
+    <p>Here are all the avialable threads</p>
+    ForumApplication.Models.ForumSystem fs = ForumApplication.Models.ForumSystem.initForumSystem();
+    
+    List<ForumApplication.Models.SubForum> subForums = fs.Forums[forum].SubForums.Values.ToList();
+
+    foreach (ForumApplication.Models.SubForum sf in subForums)
+    {
+        if (!(sf==null))
+        {
+            @Html.ActionLink(sf.Title, "ShowAllThreads", "ShowAllThreads", new { id = sf.Title }, null);
+        }
+    }
 
 @Html.ActionLink("Create a sub forum", "CreateSubForum", "CreateSubForum");
+}
+

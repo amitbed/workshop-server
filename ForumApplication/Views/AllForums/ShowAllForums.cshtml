@@ -14,7 +14,7 @@
     {
         if (!(forums[i]).IsEmpty())
         {
-                @Html.ActionLink(forums[i], "ShowAllSubForums", "ShowAllSubForums", new { id = "guest" },null);
+                @Html.ActionLink(forums[i], "ShowAllSubForums", "ShowAllSubForums", new { id = forums[i] }, null);
         }
     }
     @Html.ActionLink("Create a new forum", "CreateForum", "CreateForum", new { id = "guest" },null);   

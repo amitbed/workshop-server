@@ -16,5 +16,9 @@ namespace ForumApplication.Controllers
             return View();
         }
 
+        public ActionResult CreateNewSubFourm()
+        {
+            return View();
+        }
     }
 }
