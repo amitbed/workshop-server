@@ -51,14 +51,5 @@ namespace ForumTests
         //Debug methods
         bool IsSubForumExists(string subForumName, string forumName);
         bool queryIsMemberExists(string guestName);
-
-<<<<<<< HEAD
-=======
-
-
-
-
-        
->>>>>>> origin/master
     }
 }

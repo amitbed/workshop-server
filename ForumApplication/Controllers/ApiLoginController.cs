@@ -36,9 +36,6 @@ namespace ForumApplication.Controllers
         }
 
         //logout
-<<<<<<< HEAD
-       
-=======
         public bool Post(string username)
         {
             try
@@ -57,7 +54,5 @@ namespace ForumApplication.Controllers
                 return false;
             }
         }
->>>>>>> origin/master
-
     }
 }
