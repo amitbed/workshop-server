@@ -69,7 +69,7 @@ namespace ForumApplication.Models
         //Methods
         public bool addModerator(string memberUsername)
         {
-            if (Moderators.Count < MaxModerators)
+            if (Moderators.Count < MaxModerators && !Moderators.Contains(memberUsername))
             {
                 Moderators.Add(memberUsername);
                 return true;
@@ -77,6 +77,15 @@ namespace ForumApplication.Models
             else return false;
         }
 
+        public bool removeModerator(string memberUsername)
+        {
+            if (Moderators.Contains(memberUsername))
+            {
+                Moderators.Remove(memberUsername);
+                return true;
+            }
+            else return false;
+        }
 
         public Thread createThread(string title, string parent)
         {
