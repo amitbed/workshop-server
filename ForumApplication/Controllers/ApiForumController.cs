@@ -20,16 +20,25 @@ namespace ForumApplication.Controllers
         }
 
         //add new forum to the system
-        public void Post(List<string> args)
+        public bool Post(List<string> args)
         {
-            args.Reverse();
-            string title = args.First();
-            args.Remove(title);
-            string username = args.First();
-            args.Remove(username);
-            List<string> admins = args;
-            fs = ForumSystem.initForumSystem();
-            fs.createForum(title, username, admins);
+            try
+            {
+                args.Reverse();
+                string title = args.First();
+                args.Remove(title);
+                string username = args.First();
+                args.Remove(username);
+                List<string> admins = args;
+                fs = ForumSystem.initForumSystem();
+                fs.createForum(title, username, admins);
+                return true;
+            }
+            catch(Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
         } 
     }
 }
