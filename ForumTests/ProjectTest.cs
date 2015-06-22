@@ -194,5 +194,16 @@ namespace ForumTests
             bridge.removeForum(forumName);
         }
 
+        public bool isSubForumExistInSystem(string subForumName)
+        {
+            foreach (string f in system.Forums.Keys)
+            {
+                if (bridge.IsSubForumExists(subForumName, f) == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

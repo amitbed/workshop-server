@@ -127,8 +127,7 @@ namespace ForumTests
             List<SubForum> FoodSubs = new List<SubForum>();
             SubForum IndianRecepies = createSubForum("IndianRecepies", moderators, "Food", 1);
             FoodSubs.Add(IndianRecepies);
-            Forum f = system.searchForum("Dating");
-            Assert.IsFalse(subForumInForum(FoodSubs, f));
+            Assert.IsFalse(isSubForumExistInSystem(IndianRecepies.Title));
         }
 
         [TestMethod]
