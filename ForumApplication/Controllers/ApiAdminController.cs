@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using ForumApplication.Models;
 namespace ForumApplication.Controllers
 {
     public class ApiAdminController : ApiController
@@ -12,7 +12,7 @@ namespace ForumApplication.Controllers
         //check if user is admin in the forum
         public bool Get(List<string> args)
         {
-            fs = ForumSystem.initForumSystem();
+            ForumSystem fs = ForumSystem.initForumSystem();
             string username = args.ElementAt(0);
             string forumTitle = args.ElementAt(1);
             if (fs.Members.ContainsKey(username))

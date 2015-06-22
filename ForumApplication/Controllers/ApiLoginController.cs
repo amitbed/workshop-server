@@ -17,8 +17,14 @@ namespace ForumApplication.Controllers
             string username = args.ElementAt(0);
             string password = args.ElementAt(1);
             Guest guest = new Guest();
-            guest.login(username, password);
-            return true;
+            if (guest.login(username, password) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         //logout
