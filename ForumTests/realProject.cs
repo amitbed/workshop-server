@@ -11,6 +11,7 @@ namespace ForumTests
     public class realProject : BridgeProject
     {
         ForumSystem system = ForumSystem.initForumSystem();
+        bool isProd = false;
 
         public Forum createForum(string title, List<string> admins)
         {
@@ -117,7 +118,7 @@ namespace ForumTests
         {
             Forum f = system.searchForum(forumParent);
             SubForum sf = f.SearchSubForum(subForumParent);
-            return sf.createThread(title);
+            return sf.createThread(title, subForumParent);
         }
 
 
@@ -131,8 +132,64 @@ namespace ForumTests
 
         public bool queryIsMemberExists(string guestName)
         {
-            bool ans = system.repository.dbIsMemberExists(guestName);
+            bool ans = system.repository.dbIsMemberExists(guestName, isProd);
             return ans;
         }
+
+
+        public Message createMessage(Member member, string msgTitle, string content, string threadName, string sfName, string fName)
+        {
+            Forum f = system.searchForum(fName);
+            SubForum sf = f.SearchSubForum(sfName);
+            MemberSubForum msf = (MemberSubForum)enterSubForum(member, sfName, fName);
+            Message msg = msf.createMessage(msgTitle, content, member.Username, threadName);
+            return msg;
+
+        }
+
+        public bool isAdminInForum(string forumName, string memberUsername)
+        {
+            Forum currForum = system.searchForum(forumName);
+            return (currForum.Admins.Contains(memberUsername));
+        }
+
+        public void removeForum(string forumToDelete)
+        {
+            system.removeForum(forumToDelete, isProd);
+        }
+
+        public Member searchMember(string username)
+        {
+            if (system.Members.ContainsKey(username))
+            {
+                return system.Members[username];
+            }
+            else return null;
+        }
+
+        public void addAdminToForum(string forumName, string memberUsername)
+        {
+            Forum forum = system.searchForum(forumName);
+            forum.Admins.Add(memberUsername);
+        }
+
+        public bool addModeratorToSubForum(string forumName, string subForumName, string moderatorUsername)
+        {
+            Forum forum = system.searchForum(forumName);
+            SubForum sf = forum.SearchSubForum(subForumName);
+            if (!sf.Moderators.Contains(moderatorUsername))
+            {
+                return sf.addModerator(moderatorUsername);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //public void addSubForumToForumByAdmin(string forumName, string memberUsername)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

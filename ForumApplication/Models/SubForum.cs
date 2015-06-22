@@ -11,11 +11,14 @@ namespace ForumApplication.Models
         #region variables
         public string ID { get; set; }
         public string Title { get; set; }
+        public string Parent { get; set; }
         public Dictionary<string, Thread> Threads { get; set; }
         public List<string> Moderators { get; set; }
         public int MaxModerators { get; set; }
         private List<Member> members;
         private object threadHandler;
+        public ForumSystemRepository repository;
+        bool isProd = false;
 
         #endregion
 
@@ -47,10 +50,12 @@ namespace ForumApplication.Models
                     //this.ID = IdGen.generateSubForumId();
                     this.Threads = new Dictionary<string, Thread>();
                     this.Title = title;
+                    this.Parent = parent;
                     this.MaxModerators = maxModerators + (getParentForum(parent)).Admins.Count;
                     this.Moderators = moderators;
                     Moderators.Concat((getParentForum(parent)).Admins);
                     this.members = new List<Member>();
+                    this.repository = new ForumSystemRepository();
                     Logger.logDebug(String.Format("A new sub-forum has been created. ID: {0}, title: {1}", this.ID, this.Title));
                 }
                 else
@@ -62,18 +67,26 @@ namespace ForumApplication.Models
 
 
         //Methods
+        public bool addModerator(string memberUsername)
+        {
+            if (Moderators.Count < MaxModerators)
+            {
+                Moderators.Add(memberUsername);
+                return true;
+            }
+            else return false;
+        }
 
 
-        public Thread createThread(string title)
+        public Thread createThread(string title, string parent)
         {
             lock (this.threadHandler)
             {
                 try
                 {
-                    Thread t = new Thread(title);
+                    Thread t = new Thread(title, parent);
                     Threads.Add(t.Title, t);
-                    ForumSystemRepository repository = new ForumSystemRepository();
-                    repository.dbAddThread(t, false);
+                    repository.dbAddThread(t, isProd);
                     return t;
                 }
                 catch (Exception e)

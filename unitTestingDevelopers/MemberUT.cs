@@ -5,7 +5,8 @@ using ForumApplication.Models;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace unitTestingDevelopers{
+namespace unitTestingDevelopers
+{
 
     [TestClass]
     public class MemberUT
@@ -16,9 +17,9 @@ namespace unitTestingDevelopers{
         [TestMethod]
         public void checkMemberCreationAndRemovingFromDB()
         {
-            Member CheckingMember = system.addMember("checking","checkingPassword","checking@bgu.ac.il");
+            Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
             Assert.IsTrue(system.Members.ContainsKey("checking"));
-            Assert.IsTrue(system.repository.dbIsMemberExists("checking"));
+            Assert.IsTrue(system.repository.dbIsMemberExists("checking", isProd));
             system.repository.dbRemoveMember("checking", isProd);
         }
 
@@ -27,7 +28,7 @@ namespace unitTestingDevelopers{
         {
             Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
             Assert.IsTrue(system.Members.ContainsValue(CheckingMember));
-            Assert.IsFalse(system.repository.dbIsMemberExists("notShouldBeInDB"));
+            Assert.IsFalse(system.repository.dbIsMemberExists("notShouldBeInDB", isProd));
             system.repository.dbRemoveMember("checking", isProd);
 
         }
@@ -65,7 +66,7 @@ namespace unitTestingDevelopers{
         public void checkMemberTypeRegular()
         {
             Member CheckingMember = system.addMember("ifateli", "gilAd", "ifateli@bgu.ac.il");
-            bool ans= CheckingMember.MemberType ==(int) Types.Regular;
+            bool ans = CheckingMember.MemberType == (int)Types.Regular;
             Assert.IsTrue(ans);
         }
 

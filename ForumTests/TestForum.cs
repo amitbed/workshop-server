@@ -14,6 +14,7 @@ namespace ForumTests
 
         public override void SetUp()
         {
+
             base.SetUp();
             setUpForum();
         }
@@ -214,6 +215,145 @@ namespace ForumTests
             string listOfForums = displayForum();
             Assert.IsTrue(listOfForums.Contains("Dancing"));
         }
+
+        [TestMethod]
+        public void VerifyThreadDeleteAfterSubForumDelete()
+        {
+            List<string> moderators = new List<string>();
+            moderators.Add("sagiav");
+            SubForum Kriket = createSubForum("Kriket", moderators, "Sport", 3);
+            Thread KochinKriket = createThread("KochinKriket", "Kriket", "Sport");
+            Thread AvasKriket = createThread("AvasKriket", "Kriket", "Sport");
+            Assert.IsNotNull(Kriket);
+            Assert.IsNotNull(KochinKriket);
+            Assert.IsNotNull(AvasKriket);
+            removeSubForum("Kriket", "Sport");
+            Assert.IsTrue(IsSubForumExists("Kriket","Sport")== false);
+            Assert.IsNull(Kriket);
+            Assert.IsNull(KochinKriket);
+            Assert.IsNull(AvasKriket);
+        }
+
+        [TestMethod]
+        public void VerifyMessagesDeleteAfterThreadDelete()
+        {
+            List<string> moderators = new List<string>();
+            moderators.Add("sagiav");
+            SubForum Frisbee = createSubForum("Frisbee", moderators, "Sport", 3);
+            Thread KochinFrisbee = createThread("KochinFrisbee", "Frisbee", "Sport");
+            Thread AvasFrisbee = createThread("AvasFrisbee", "Frisbee", "Sport");
+            Message KochinTalk = createMessage(Sagi,"KochinTalk","content of this", "KochinFrisbee", "Frisbee", "Sport");
+            Assert.IsNotNull(Frisbee);
+            Assert.IsNotNull(KochinFrisbee);
+            Assert.IsNotNull(AvasFrisbee);
+            Assert.IsNotNull(KochinTalk);
+            removeSubForum("Frisbee", "Sport");
+            Assert.IsTrue(IsSubForumExists("Frisbee", "Sport") == false);
+            Assert.IsNull(Frisbee);
+            Assert.IsNull(KochinFrisbee);
+            Assert.IsNull(AvasFrisbee);
+            Assert.IsNull(KochinTalk);
+        }
+
+        [TestMethod]
+        public void addAndDeleteSubForum()
+        {
+            List<string> moderators = new List<string>();
+            moderators.Add("sagiav");
+            List<SubForum> FoodSubs = new List<SubForum>();
+            SubForum ItalianRecepies = createSubForum("ItalianRecepies", moderators, "Food", 1);
+            FoodSubs.Add(ItalianRecepies);
+            Forum foodForum = searchForum("Food");
+            Assert.IsTrue(foodForum.SubForums.ContainsKey("ItalianRecepies"));
+
+            removeSubForum("ItalianRecepies", "Food");
+            Assert.IsFalse(foodForum.SubForums.ContainsKey("ItalianRecepies"));
+        }
+
+        [TestMethod]
+        public void verifySuperAdminIsForumAdmin()
+        {
+            Member superAdmin = searchMember("superAdmin");
+            List<string> admins = new List<string>();
+            admins.Add("sagiav");
+            createForum("Reality Shows",admins);
+            Forum currForum = searchForum("Reality Shows");
+            Assert.IsTrue(isAdminInForum("Reality Shows", superAdmin.Username));
+        }
+
+        [TestMethod]
+        public void addForumWithNoAdmins()
+        {
+            int prevNumOfForums = system.Forums.Count;
+            List<string> adminSport = new List<string>();
+            Forum Sport1 = createForum("Sport1", adminSport);
+            int newNumOfForums = system.Forums.Count;
+            Assert.IsNotNull(Sport1);
+            Assert.AreEqual<int>(newNumOfForums, prevNumOfForums + 1);
+        }
+
+        [TestMethod]
+        public void addForumWithBadTitle()
+        {
+            int prevNumOfForums = system.Forums.Count;
+            List<string> adminSport = new List<string>();
+            adminSport.Add("abadie");
+            Forum forum1 = createForum("DROP TABLE", adminSport);
+            Assert.IsNull(forum1);
+            Assert.AreEqual<int>(system.Forums.Count, prevNumOfForums);
+            Forum forum2 = createForum("INSERT", adminSport);
+            Assert.IsNull(forum2);
+            Assert.AreEqual<int>(system.Forums.Count, prevNumOfForums);
+            Forum forum3 = createForum("dfsfsf--", adminSport);
+            Assert.IsNull(forum3);
+            Assert.AreEqual<int>(system.Forums.Count, prevNumOfForums);
+            Forum forum4 = createForum("UPDATE", adminSport);
+            Assert.IsNull(forum4);
+            Assert.AreEqual<int>(system.Forums.Count, prevNumOfForums);
+        }
+
+        [TestMethod]
+        public void superAdminAddsAdmin()
+        {
+            addAdminToForum("Sport", "sagiav");
+            Assert.IsTrue(isAdminInForum("sports","sagiav"));
+        }
+
+        [TestMethod]
+        public void addMoreThanMaxModeratorsToSubForum()
+        {
+            createForum("RealityShows", new List<string>());
+            createSubForum("TheBigBrother", new List<string>(), "RealityShows", 1);
+            addModeratorToSubForum("RealityShows", "TheBigBrother", "sagiav");
+            Assert.IsFalse(addModeratorToSubForum("RealityShows", "TheBigBrother", "amitbed"));
+        }
+
+        [TestMethod]
+        public void checkDeleteNonExistingForum()
+        {
+            List<string> admins = new List<string>();
+            admins.Add("abadie");
+            admins.Add("amitbed");
+            Forum forum = createForum("forumToDelete", admins);
+            string listOfForums = displayForum();
+            Assert.IsTrue(listOfForums.Contains("forumToDelete"));
+            removeForum("forumToDelete");
+            Assert.IsFalse(listOfForums.Contains("forumToDelete"));
+        }
+
+        [TestMethod]
+        public void checkCorrectAdminsInForum()
+        {
+            List<string> admins = new List<string>();
+            admins.Add("abadie");
+            admins.Add("amitbed");
+            Forum forum = createForum("forumToCheck", admins);
+            string listOfForums = displayForum();
+            Assert.IsTrue(listOfForums.Contains("forumToCheck"));
+            Assert.IsTrue(isAdminInForum(forum.Title, "abadie"));
+            Assert.IsTrue(isAdminInForum(forum.Title, "amitbed"));
+        }
+
 
     }
 

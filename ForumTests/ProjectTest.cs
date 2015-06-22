@@ -165,5 +165,34 @@ namespace ForumTests
             bridge.changeSettings(member,username, password, email);
         }
 
+        public Message createMessage(Member member, string msgTitle, string content, string threadName, string sfName, string fName)
+        {
+            return bridge.createMessage(member, msgTitle,content, threadName, sfName, fName);
+        }
+
+        public Member searchMember(string username)
+        {
+            return bridge.searchMember(username);
+        }
+
+        public void addAdminToForum(string forumName, string memberUsername)
+        {
+            bridge.addAdminToForum(forumName, memberUsername);
+        }
+        public bool isAdminInForum(string forumName, string memberUsername)
+        {
+            return bridge.isAdminInForum(forumName, memberUsername);
+        }
+
+        public bool addModeratorToSubForum(string forumName, string subForumName, string moderatorUsername)
+        {
+            return bridge.addModeratorToSubForum(forumName, subForumName, moderatorUsername);
+        }
+
+        public void removeForum(string forumName)
+        {
+            bridge.removeForum(forumName);
+        }
+
     }
 }

@@ -13,11 +13,11 @@ namespace ForumApplication.Controllers
         public ActionResult CreateForum()
         {
             //if (ForumApplication.Models.ForumSystem.superadmin.Equals(id))
-                return View();
+            return View();
             ////else
             ////    return View("../OnlySuperAdmin");
         }
-    
+
 
         [HttpPost]
         public ActionResult CreateNewForum()
@@ -27,12 +27,11 @@ namespace ForumApplication.Controllers
             List<string> admins = new List<string>();
             admins.Add(admin);
             ForumSystem fs = ForumSystem.initForumSystem();
-            Forum res = fs.createForum(title,"superAdmin", admins);
-            //if (res != null)
+            Forum res = fs.createForum(title, "superAdmin", admins);
+            if (res != null)
                 return View();
-            //else
-            //    return View("OnlySuperAdmin");
+            else
+                return View("OnlySuperAdmin");
         }
-
     }
 }

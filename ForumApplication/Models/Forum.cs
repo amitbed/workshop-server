@@ -16,6 +16,9 @@ namespace ForumApplication.Models
         public Dictionary<string, ModeratorSubForum> ModeratorSubForums { get; set; }
         public List<string> Admins { get; set; }
         private object forumHandler;
+        public ForumSystemRepository repository;
+        bool isProd = false;
+
 
         #endregion
 
@@ -28,6 +31,7 @@ namespace ForumApplication.Models
             this.SubForums = new Dictionary<string, SubForum>();
             this.Title = title;
             this.Admins = admins;
+            this.repository = new ForumSystemRepository();
             if ((admins == null) || (String.IsNullOrEmpty(title)))
             {
                 if ((String.IsNullOrEmpty(title)) && (!(admins == null)))
@@ -57,7 +61,7 @@ namespace ForumApplication.Models
                 {
                     SubForum sf = new SubForum(title, moderators, parent, maxModerators);
                     SubForums.Add(title, sf);
-                    ForumSystemRepository repository = new ForumSystemRepository();
+                    repository.dbAddSubForum(sf, isProd);
                     return sf;
                 }
                 catch (Exception e)

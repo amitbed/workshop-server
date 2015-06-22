@@ -19,24 +19,17 @@ namespace ForumApplication.Controllers
 
         public ActionResult CreateNewSubForum()
         {
-            try
-            {
-                string title = Request["SubForumtitle"].ToString();
-                string moderator = Request["moderators"].ToString();
-                string parent = Request["parent"].ToString().ToLower();
-                int maxModerators = Int32.Parse(Request["maxModerators"].ToString());
+            string title = Request["SubForumtitle"].ToString();
+            string moderator = Request["moderators"].ToString();
+            string parent = Request["parent"].ToString().ToLower();
+            int maxModerators = Int32.Parse(Request["maxModerators"].ToString());
 
-                List<string> moderators = new List<string>();
-                moderators.Add(moderator);
-                ForumSystem fs = ForumSystem.initForumSystem();
-                fs.Forums[parent].createSubForum(title, moderators, parent, maxModerators);
-                ViewData["subForumParent"] = parent;
-                return View();
-            }
-            catch (Exception e)
-            {
-                return View("Error");
-            }
+            List<string> moderators = new List<string>();
+            moderators.Add(moderator);
+            ForumSystem fs = ForumSystem.initForumSystem();
+            fs.Forums[parent].createSubForum(title, moderators, parent, maxModerators);
+            ViewData["subForumParent"] = parent;
+            return View();
         }
     }
 }

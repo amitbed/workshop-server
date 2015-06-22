@@ -14,21 +14,50 @@ namespace ForumApplication.Controllers
         //login
         public bool Post(List<string> args)
         {
-            string username = args.ElementAt(0);
-            string password = args.ElementAt(1);
-            Guest guest = new Guest();
-            if (guest.login(username, password) == null)
+            try
             {
-                return false;
+                string username = args.ElementAt(0);
+                string password = args.ElementAt(1);
+                Guest guest = new Guest();
+                if (guest.login(username, password) == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return true;
+                Logger.logError(e.StackTrace);
+                return false;
             }
         }
 
         //logout
+<<<<<<< HEAD
        
+=======
+        public bool Post(string username)
+        {
+            try
+            {
+                fs = ForumSystem.initForumSystem();
+                if (fs.Members.ContainsKey(username))
+                {
+                    Member mem = fs.Members[username];
+                    mem.logout();
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
+        }
+>>>>>>> origin/master
 
     }
 }

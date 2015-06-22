@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ForumApplication.Models
 {
-    public class ForumSystemRepository //:IQueries
+    public class ForumSystemRepository : IQueries
     {
         public ForumSystemRepository()
         {
@@ -80,7 +80,7 @@ namespace ForumApplication.Models
             }
         }
 
-        public bool dbIsMemberExists(string username)
+        public bool dbIsMemberExists(string username, bool isProd)
         {
             var context = new ForumDBContext();
             var query = from mem in context.Members where mem.Username == username select mem;
@@ -131,8 +131,34 @@ namespace ForumApplication.Models
             }
         }
 
+        public void dbAddThread(Thread thread, bool isProd)
+        {
+            using (var dbContext = new ForumDBContext())
+            {
+                if (!isProd)
+                {
+                    dbContext.ChangeDatabaseTo("TestForumDBContext");
+                }
+                dbContext.Threads.Add(thread);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void dbAddSubForum(SubForum subForum, bool isProd)
+        {
+            using (var dbContext = new ForumDBContext())
+            {
+                if (!isProd)
+                {
+                    dbContext.ChangeDatabaseTo("TestForumDBContext");
+                }
+                dbContext.SubForums.Add(subForum);
+                dbContext.SaveChanges();
+            }
+        }
+
         //TO DO
-        public void dbRemoveForum(string forumID, bool isProd)
+        public void dbRemoveForum(string forumTitle, bool isProd)
         {
             using (var dbContext = new ForumDBContext())
             {
@@ -141,7 +167,7 @@ namespace ForumApplication.Models
                     dbContext.ChangeDatabaseTo("TestForumDBContext");
                 }
                 var forum = (from f in dbContext.Forums
-                             where f.ID == forumID
+                             where f.Title == forumTitle
                              select f).FirstOrDefault();
                 dbContext.Forums.Remove(forum);
                 dbContext.SaveChanges();
@@ -162,9 +188,9 @@ namespace ForumApplication.Models
         //        dbContext.SaveChanges();
         //    }
         //}
-        
+
         //TO DO
-        public void dbRemoveSubForum(string subForumID, bool isProd)
+        public void dbRemoveSubForum(string subForumTitle, bool isProd)
         {
             using (var dbContext = new ForumDBContext())
             {
@@ -173,9 +199,25 @@ namespace ForumApplication.Models
                     dbContext.ChangeDatabaseTo("TestForumDBContext");
                 }
                 var subForum = (from sf in dbContext.SubForums
-                                where sf.ID == subForumID
+                                where sf.Title == subForumTitle
                                 select sf).FirstOrDefault();
                 dbContext.SubForums.Remove(subForum);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void dbRemoveThread(string threadTitle, bool isProd)
+        {
+            using (var dbContext = new ForumDBContext())
+            {
+                if (!isProd)
+                {
+                    dbContext.ChangeDatabaseTo("TestForumDBContext");
+                }
+                var thread = (from t in dbContext.Threads
+                              where t.Title == threadTitle
+                              select t).FirstOrDefault();
+                dbContext.Threads.Remove(thread);
                 dbContext.SaveChanges();
             }
         }
@@ -213,12 +255,6 @@ namespace ForumApplication.Models
                 }
             }
         }
-
-        public void dbAddThread(Thread t, bool isProd)
-        {
-
-        }
-
         public void cacheSubForums(Dictionary<string, SubForum> dictionary, string subForumID, bool isProd)
         {
             using (var dbContext = new ForumDBContext())
@@ -267,11 +303,6 @@ namespace ForumApplication.Models
                     dictionary.Add(m.ID, m);
                 }
             }
-        }
-
-        internal void dbRemoveThread(string threadName, bool p)
-        {
-            throw new NotImplementedException();
         }
     }
 }

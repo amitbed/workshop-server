@@ -19,6 +19,7 @@ namespace ForumTests
         Member createMember(string username, string password, string email);
         Member getMember(string userName);
         string displayForums();
+        void removeForum(string forumToDelete);
 
         //SubForum methods
         string displayThreads(Member member, string subForumName, string forumName);
@@ -27,16 +28,21 @@ namespace ForumTests
 
         //Member mathods
         void changeSettings(Member member, string username, string password, string email);
+        Member searchMember(string username);
 
         //Admin methods
         void removeSubForum(string sfName, string forumName);
         void addSubForumToForumByAdmin(SubForum sf,string currForum, ModeratorSubForum currMods);
-
+        bool isAdminInForum(string forumName, string memberUsername);
+        //void addSubForumToForumByAdmin(string forumName, string memberUsername);
+        void addAdminToForum(string forumName, string memberUsername);
+        bool addModeratorToSubForum(string forumName, string subForumName, string moderatorUsername);
 
         //Thread methods
         string displayMessages(Member member, string ThreadName, string sfName, string fName);
 
         //Message methods
+        Message createMessage(Member member, string msgTitle,string content, string threadName, string sfName, string fName);
 
         //Guest methods
         void register(Guest g, string username, string password, string email);
@@ -46,5 +52,13 @@ namespace ForumTests
         bool IsSubForumExists(string subForumName, string forumName);
         bool queryIsMemberExists(string guestName);
 
+<<<<<<< HEAD
+=======
+
+
+
+
+        
+>>>>>>> origin/master
     }
 }
