@@ -6,19 +6,15 @@ using System.Web.Mvc;
 
 namespace ForumApplication.Controllers
 {
-    public class ShowAllThreadsController : Controller
+    public class ShowAllMessagesController : Controller
     {
         //
-        // GET: /ShowAllThreads/
+        // GET: /ShowAllMessages/
 
-        public ActionResult ShowAllThreads()
+        public ActionResult ShowAllMessages()
         {
             return View();
         }
 
-        public ActionResult CreateThread()
-        {
-            return View();
-        }
     }
 }

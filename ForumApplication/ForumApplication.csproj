@@ -189,8 +189,11 @@
     <Compile Include="Controllers\AllForumsController.cs" />
     <Compile Include="Controllers\CreateForumController.cs" />
     <Compile Include="Controllers\CreateSubForumController.cs" />
+    <Compile Include="Controllers\CreateThreadController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostNewMessageController.cs" />
+    <Compile Include="Controllers\ShowAllMessagesController.cs" />
     <Compile Include="Controllers\ShowAllSubForums.cs" />
     <Compile Include="Controllers\ShowAllThreadsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -349,6 +352,10 @@
     <Content Include="Views\ShowAllSubForums\ShowAllSubForums.cshtml" />
     <Content Include="Views\OnlySuperAdmin.cshtml" />
     <Content Include="Views\CreateSubForum\CreateNewSubForum.cshtml" />
+    <Content Include="Views\ShowAllMessages\ShowAllMessages.cshtml" />
+    <Content Include="Views\CreateThread\CreateThread.cshtml" />
+    <Content Include="Views\CreateThread\CreateNewThread.cshtml" />
+    <Content Include="Views\PostNewMessage\PostNewMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

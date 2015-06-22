@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "CreateThread";
+}
+
+<h2>CreateThread</h2>
+<fieldset>
+    @using (Ajax.BeginForm("CreateNewThread", "CreateThread", new AjaxOptions { UpdateTargetId = "divNewForumDeatils" }))
+    {
+        <div id="divNewForumDeatils"></div>
+        <ol>
+            <li>
+                @Html.Label("Title")
+                @Html.TextBox("Threadtitle")
+            </li>
+
+            <li>
+                @Html.Label("SubForum")
+                @Html.TextBox("SubForum")
+            </li>
+            <li>
+                @Html.Label("Forum")
+                @Html.TextBox("Forum")
+            </li>
+            <li>
+                @Html.Label("Content")
+                @Html.TextBox("Content")
+            </li>
+        </ol>
+        <button>Publish</button>
+    }
+</fieldset>

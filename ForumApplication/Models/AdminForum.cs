@@ -10,10 +10,12 @@ namespace ForumApplication.Models
     {
         Forum parentforum;
         public int MaxModerators { get; set; }
+        object forumHandler;
 
         public AdminForum(Forum forum)
         {
             parentforum = forum;
+            this.forumHandler = new object();
 
         }
 
@@ -22,55 +24,108 @@ namespace ForumApplication.Models
             // TODO: Complete member initialization
         }
 
-        public void setProperties(int moderatorNumber)
+        public bool setProperties(int moderatorNumber)
         {
-            foreach (SubForum s in parentforum.SubForums.Values)
+            try
             {
-                s.MaxModerators = moderatorNumber;
+                foreach (SubForum s in parentforum.SubForums.Values)
+                {
+                    s.MaxModerators = moderatorNumber;
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
             }
         }
 
-        public void addSubForum(SubForum subForum, MemberSubForum memberSubForum, ModeratorSubForum moderatorSubForum)
+        public bool addSubForum(SubForum subForum, MemberSubForum memberSubForum, ModeratorSubForum moderatorSubForum)
         {
-            if (subForum != null && memberSubForum != null && moderatorSubForum != null)
+            lock (this.forumHandler)
             {
-                //MemberSubForum msf = new MemberSubForum(subForum.Title, subForum.Moderators, this.Title, subForum.MaxModerators);
-                //SubForums.Add(subForum.Title, subForum);
-                //MemberSubForums.Add(subForum.Title, msf);
-                //ModeratorSubForums.Add(subForum.Title, new ModeratorSubForum(msf));
+                try
+                {
+                    if (subForum != null && memberSubForum != null && moderatorSubForum != null)
+                    {
+                        //MemberSubForum msf = new MemberSubForum(subForum.Title, subForum.Moderators, this.Title, subForum.MaxModerators);
+                        //SubForums.Add(subForum.Title, subForum);
+                        //MemberSubForums.Add(subForum.Title, msf);
+                        //ModeratorSubForums.Add(subForum.Title, new ModeratorSubForum(msf));
 
-                base.SubForums.Add(subForum.Title ,subForum);
-                base.MemberSubForums.Add(memberSubForum.Title, memberSubForum);
-                base.ModeratorSubForums.Add(moderatorSubForum.Title, moderatorSubForum);
-                Logger.logDebug(string.Format("The new sub forum: {0} has been created successfully with id {1}", subForum.Title, subForum.ID));
-            }
-            else
-            {
-                Logger.logError("Failed to add sub forum. Reason: sub forum is null");
+                        base.SubForums.Add(subForum.Title, subForum);
+                        base.MemberSubForums.Add(memberSubForum.Title, memberSubForum);
+                        base.ModeratorSubForums.Add(moderatorSubForum.Title, moderatorSubForum);
+                        Logger.logDebug(string.Format("The new sub forum: {0} has been created successfully with id {1}", subForum.Title, subForum.ID));
+                        return true;
+                    }
+                    else
+                    {
+                        Logger.logError("Failed to add sub forum. Reason: sub forum is null");
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return false;
+                }
             }
 
         }
 
        
-        public void removeSubForum(string subForumName)
+        public bool removeSubForum(string subForumName)
         {
-            SubForum currSubForum = SubForums[subForumName];
-            if (currSubForum != null)
+            lock (forumHandler)
             {
-                currSubForum.delete();
-                SubForums.Remove(subForumName);
-
+                try
+                {
+                    SubForum currSubForum = SubForums[subForumName];
+                    if (currSubForum != null)
+                    {
+                        currSubForum.delete();
+                        SubForums.Remove(subForumName);
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return false;
+                }
             }
         }
 
-        public void upgradeMember(string memberID)
+        public bool upgradeMember(string memberID)
         {
-            //TODO: add implementation
+            try
+            {
+                //TODO: add implementation
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
         }
 
         public void downgradeMember(string memberID)
         {
-            //TODO: add implementation
+            try
+            {
+                //TODO: add implementation
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
         }
     }
 }

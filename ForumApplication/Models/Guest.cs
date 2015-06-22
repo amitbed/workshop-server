@@ -43,29 +43,37 @@ namespace ForumApplication.Models
 
         public string login(string username, string password)
         {
-            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            try
             {
-                Logger.logError("one of the arguments is empty or null");
-                return null;
-            }
-            else
-            {
-                ForumSystem forumSystem = ForumSystem.initForumSystem();
-                if (forumSystem.Members.ContainsKey(username))
+                if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
                 {
-                    Member member = forumSystem.Members[username];
-                    if (String.Equals(username, member.Username) && String.Equals(password, member.Password))
-                    {
-                        Logger.logDebug(String.Format("Member: usernamer:{1} has logged in", member.Username));
-                        return username;
-                    }
-                    else
-                    {
-                        Logger.logDebug(String.Format("Username: {0}, password{1} failed to log in. Reason: member not found", username, password));
-                        return null;
-                    }
+                    Logger.logError("one of the arguments is empty or null");
+                    return null;
                 }
-                else return null;
+                else
+                {
+                    ForumSystem forumSystem = ForumSystem.initForumSystem();
+                    if (forumSystem.Members.ContainsKey(username))
+                    {
+                        Member member = forumSystem.Members[username];
+                        if (String.Equals(username, member.Username) && String.Equals(password, member.Password))
+                        {
+                            Logger.logDebug(String.Format("Member: usernamer:{1} has logged in", member.Username));
+                            return username;
+                        }
+                        else
+                        {
+                            Logger.logDebug(String.Format("Username: {0}, password{1} failed to log in. Reason: member not found", username, password));
+                            return null;
+                        }
+                    }
+                    else return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return null;
             }
         }
     }

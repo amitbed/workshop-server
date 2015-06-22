@@ -32,39 +32,40 @@ namespace ForumApplication.Models
 
         public Member(string username, string password, string emailAddress)
         {
-            if ((String.IsNullOrEmpty(username)) || (String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(emailAddress)))
-            {
-                if (String.IsNullOrEmpty(username))
+                if ((String.IsNullOrEmpty(username)) || (String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(emailAddress)))
                 {
-                    Logger.logError("Failed to create a new member. Reason: username is empty");
+                    if (String.IsNullOrEmpty(username))
+                    {
+                        Logger.logError("Failed to create a new member. Reason: username is empty");
+                    }
+                    if (String.IsNullOrEmpty(password))
+                    {
+                        Logger.logError("Failed to create a new member. Reason: password is empty");
+                    }
+                    if (String.IsNullOrEmpty(emailAddress))
+                    {
+                        Logger.logError("Failed to create a new member. Reason: email is empty");
+                    }
+
                 }
-                if (String.IsNullOrEmpty(password))
+                else
                 {
-                    Logger.logError("Failed to create a new member. Reason: password is empty");
-                }
-                if (String.IsNullOrEmpty(emailAddress))
-                {
-                    Logger.logError("Failed to create a new member. Reason: email is empty");
+                    this.Username = username;
+                    this.Password = password;
+                    this.Email = emailAddress;
+                    this.TimeLoggedIn = 0;
+                    this.isActive = true;
+                    this.MyForums = new List<string>();
+                    this.MySubForums = new List<string>();
+                    this.MyThreads = new List<string>();
+                    this.MyFriends = new List<string>();
+                    this.MemberType = (int)Types.Regular;
+                    this.NumOfPublishedMessages = 0;
+                    this.oldPasswords = new List<string>();
+                    this.PasswordQuestion = new Dictionary<string, string>();
+                    Logger.logDebug(String.Format("A new user has been created. username: {0}, password: {1}, email: {2}", Username, Password, emailAddress));
                 }
 
-            }
-            else
-            {
-                this.Username = username;
-                this.Password = password;
-                this.Email = emailAddress;
-                this.TimeLoggedIn = 0;
-                this.isActive = true;
-                this.MyForums = new List<string>();
-                this.MySubForums = new List<string>();
-                this.MyThreads = new List<string>();
-                this.MyFriends = new List<string>();
-                this.MemberType = (int)Types.Regular;
-                this.NumOfPublishedMessages = 0;
-                this.oldPasswords = new List<string>();
-                this.PasswordQuestion = new Dictionary<string, string>();
-                Logger.logDebug(String.Format("A new user has been created. username: {0}, password: {1}, email: {2}", Username, Password, emailAddress));
-            }
         }
 
         
@@ -85,46 +86,76 @@ namespace ForumApplication.Models
             }
         }
 
-        public void logout()
+        public bool logout()
         {
-            this.isActive = false;
-            this.TimeLoggedIn += DateTime.Now.Millisecond;
+            try
+            {
+                this.isActive = false;
+                this.TimeLoggedIn += DateTime.Now.Millisecond;
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
         }
 
         public bool changePassword(string newPasword)
         {
-            bool ans = false;
-            this.oldPasswords.Add(this.Password);
-            if (!oldPasswords.Contains(newPasword))
+            try
             {
-                ans = true;
-                this.Password = newPasword;
-                Logger.logDebug(String.Format("the password for {0} has been changed to: {1}", Username, newPasword));
-                return ans;
+                bool ans = false;
+                this.oldPasswords.Add(this.Password);
+                if (!oldPasswords.Contains(newPasword))
+                {
+                    ans = true;
+                    this.Password = newPasword;
+                    Logger.logDebug(String.Format("the password for {0} has been changed to: {1}", Username, newPasword));
+                    return ans;
+                }
+                else
+                {
+                    Logger.logError(String.Format("the password: {0} has already been used", newPasword));
+                    return ans;
+                }
             }
-            else
+            catch (Exception e)
             {
-                Logger.logError(String.Format("the password: {0} has already been used", newPasword));
-                return ans;
+                Logger.logError(e.StackTrace);
+                return false;
             }
+            
         }
 
-        public void changeSettings(string nusername, string npassword, string nemail)
+        public bool changeSettings(string nusername, string npassword, string nemail)
         {
-            if (nusername != null){
-                // Need to add check that this user name is not already exists in DB
-                this.Username = nusername;
-                Logger.logDebug(String.Format("the username for {0} has been changed to: {1}", Username));
-            }
-            if (npassword != null)
+            try
             {
-                changePassword(npassword);
+                if (nusername != null)
+                {
+                    // Need to add check that this user name is not already exists in DB
+                    this.Username = nusername;
+                    Logger.logDebug(String.Format("the username for {0} has been changed to: {1}", Username));
+                    return true;
+                }
+                if (npassword != null)
+                {
+                    changePassword(npassword);
+                    return true;
+                }
+                if (nemail != null)
+                {
+                    this.Email = nemail;
+                    Logger.logDebug(String.Format("the email for {0} has been changed to: {1}", Email));
+                    return true;
+                }
+                return false;
             }
-            if (nemail != null)
+            catch (Exception e)
             {
-                this.Email = nemail;
-                Logger.logDebug(String.Format("the email for {0} has been changed to: {1}", Email));
-
+                Logger.logError(e.StackTrace);
+                return false;
             }
         }
     }

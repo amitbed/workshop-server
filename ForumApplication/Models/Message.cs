@@ -17,12 +17,14 @@ namespace ForumApplication.Models
         public string UserName { get; set; }
         [Column("Reply_ID")]
         public List<Message> Replies { get; set; }
+        private object messageHandler;
 
         public Message() { }
 
         //Overload Contructor
         public Message(string title, string content, string userName)
         {
+            this.messageHandler = new object();
             if ((String.IsNullOrEmpty(content)) || (String.IsNullOrEmpty(userName)))
             {
                 if (String.IsNullOrEmpty(content))
@@ -51,25 +53,48 @@ namespace ForumApplication.Models
         //This method displays the message
         public string displayMessage()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Message Id: " + this.ID);
-            sb.Append("Message Date: " + Date);
-            sb.Append("Message Content: " + Content);
-            sb.AppendLine();
-            return sb.ToString();
+            lock (messageHandler)
+            {
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("Message Id: " + this.ID);
+                    sb.Append("Message Date: " + Date);
+                    sb.Append("Message Content: " + Content);
+                    sb.AppendLine();
+                    return sb.ToString();
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return null;
+                }
+            }
         }
 
-        public void postReply(Message reply, string replierID)
+        public bool postReply(Message reply, string replierID)
         {
-
-            if (reply != null)
+            lock (messageHandler)
             {
-                Replies.Add(reply);
-                Logger.logDebug(string.Format("The new reply: {0} has been created successfully with id {1}", reply.Title, reply.ID));
-            }
-            else
-            {
-                Logger.logError("Failed to add reply. Reason: reply is null");
+                try
+                {
+                    if (reply != null)
+                    {
+                        Replies.Add(reply);
+                        Logger.logDebug(string.Format("The new reply: {0} has been created successfully with id {1}", reply.Title, reply.ID));
+                        return true;
+                    }
+                    else
+                    {
+                        Logger.logError("Failed to add reply. Reason: reply is null");
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return false;
+                }
             }
         }
 

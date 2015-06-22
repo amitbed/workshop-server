@@ -16,7 +16,7 @@
     {
         if (!(sf==null))
         {
-            @Html.ActionLink(sf.Title, "ShowAllThreads", "ShowAllThreads", new { id = sf.Title }, null);
+            @Html.ActionLink(sf.Title, "ShowAllThreads", "ShowAllThreads", new { id = forum+" "+sf.Title }, null);
         }
     }
 

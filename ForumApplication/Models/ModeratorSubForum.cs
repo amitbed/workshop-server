@@ -15,13 +15,23 @@ namespace ForumApplication.Models
             this.moderators = moderators;
         }
 
-        public void removeThread(string threadName)
+        public bool removeThread(string threadName)
         {
-            Thread currThread = Threads[threadName];
-            if (currThread != null)
+            try
             {
-                currThread.delete();
-                Threads.Remove(threadName);
+                Thread currThread = Threads[threadName];
+                if (currThread != null)
+                {
+                    currThread.delete();
+                    Threads.Remove(threadName);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
             }
         }
 
