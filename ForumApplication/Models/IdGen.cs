@@ -13,10 +13,11 @@ namespace ForumApplication.Models
         private static long thread=0;
         private static long subForum = 0;
         private static long message = 0;
+        private static object memberGenerator=new object();
 
         public IdGen()
         {
-
+            
         }
 
         public static string generateMessageId()
@@ -27,9 +28,12 @@ namespace ForumApplication.Models
         }
 
         public static string generateMemberId(){
-            IdGen.member++;
-            Logger.logDebug(String.Format("New member id has been generated: {0}", IdGen.member));
-            return ("member" + IdGen.member);
+            lock (IdGen.memberGenerator)
+            {
+                IdGen.member++;
+                Logger.logDebug(String.Format("New member id has been generated: {0}", IdGen.member));
+                return ("member" + IdGen.member);
+            }
         }
 
         public static string generateForumId()

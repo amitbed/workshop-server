@@ -8,9 +8,11 @@ namespace ForumApplication.Models
 {
     public class Thread
     {
+        private object messageHandler;
         //Overload Constructor
         public Thread(string title)
         {
+            this.messageHandler = new object();
             if (String.IsNullOrEmpty(title))
             {
                 Logger.logError("Failed to create a new thread. Reason: title is empty");
@@ -32,42 +34,64 @@ namespace ForumApplication.Models
         //Method
         public string displayMessages()
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (Message message in Messages.Values)
+            lock (messageHandler)
             {
-                sb.Append(message.displayMessage());
-                sb.AppendLine();
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (Message message in Messages.Values)
+                    {
+                        sb.Append(message.displayMessage());
+                        sb.AppendLine();
+                    }
+                    return sb.ToString();
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return null;
+                }
             }
-            return sb.ToString();
         }
 
         public bool removeMessage(string memberID, string messageID)
         {
-            if ((String.IsNullOrEmpty(memberID)) || (String.IsNullOrEmpty(messageID)))
+            lock (messageHandler)
             {
-                if ((String.IsNullOrEmpty(memberID)))
+                try
                 {
-                    Logger.logError("Failed to remove a message. Reason: member id is empty");
-                }
-                if ((String.IsNullOrEmpty(messageID)))
-                {
-                    Logger.logError("Failed to remove a message. Reason: message id is empty");
-                }
-                return false;
-            }
-            else
-            {
-                foreach (Message m in Messages.Values)
-                {
-                    if ((m.Equals(messageID)) && (m.UserName.Equals(messageID)))
+                    if ((String.IsNullOrEmpty(memberID)) || (String.IsNullOrEmpty(messageID)))
                     {
-                        this.Messages.Remove(m.Title);
-                        Logger.logDebug(String.Format("Message has been removed. ID:{0}", m.ID));
-                        return true;
+                        if ((String.IsNullOrEmpty(memberID)))
+                        {
+                            Logger.logError("Failed to remove a message. Reason: member id is empty");
+                        }
+                        if ((String.IsNullOrEmpty(messageID)))
+                        {
+                            Logger.logError("Failed to remove a message. Reason: message id is empty");
+                        }
+                        return false;
+                    }
+                    else
+                    {
+                        foreach (Message m in Messages.Values)
+                        {
+                            if ((m.Equals(messageID)) && (m.UserName.Equals(messageID)))
+                            {
+                                this.Messages.Remove(m.Title);
+                                Logger.logDebug(String.Format("Message has been removed. ID:{0}", m.ID));
+                                return true;
+                            }
+                        }
+                        Logger.logError("Failed to remove a message. Reason: message id not found");
+                        return false;
                     }
                 }
-                Logger.logError("Failed to remove a message. Reason: message id not found");
-                return false;
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return false;
+                }
             }
         }
 

@@ -15,6 +15,7 @@ namespace ForumApplication.Models
         public List<string> Moderators { get; set; }
         public int MaxModerators { get; set; }
         private List<Member> members;
+        private object threadHandler;
 
         #endregion
 
@@ -22,6 +23,7 @@ namespace ForumApplication.Models
         //Overload Constructor
         public SubForum(string title, List<string> moderators, string parent, int maxModerators)
         {
+            this.threadHandler = new object();
             if ((String.IsNullOrEmpty(title)) || (String.IsNullOrEmpty(parent)) || (moderators == null))
             {
                 if (String.IsNullOrEmpty(title))
@@ -64,72 +66,137 @@ namespace ForumApplication.Models
 
         public Thread createThread(string title)
         {
-            Thread t = new Thread(title);
-            Threads.Add(t.Title, t);
-            return t;
+            lock (this.threadHandler)
+            {
+                try
+                {
+                    Thread t = new Thread(title);
+                    Threads.Add(t.Title, t);
+                    return t;
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return null;
+                }
+            }
         }
 
         public bool isThreadExistsInSubForum(string threadTitle)
         {
-            foreach (Thread t in Threads.Values)
+            lock (this.threadHandler)
             {
-                if (t.Title.Equals(threadTitle))
-                    return true;
+                try
+                {
+                    foreach (Thread t in Threads.Values)
+                    {
+                        if (t.Title.Equals(threadTitle))
+                            return true;
+                    }
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return false;
+                }
             }
-            return false;
         }
 
         public Forum getParentForum(string parentName)
         {
-            ForumSystem forumSystem = ForumSystem.initForumSystem();
-            if (forumSystem.Forums.ContainsKey(parentName))
+            lock (this.threadHandler)
             {
-                return forumSystem.Forums[parentName];
-            }
-            else
-            {
-                return null;
+                try
+                {
+                    ForumSystem forumSystem = ForumSystem.initForumSystem();
+                    if (forumSystem.Forums.ContainsKey(parentName))
+                    {
+                        return forumSystem.Forums[parentName];
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return null;
+                }
             }
         }
 
         //This method displays a sub-forum's threads
         public string displayThreads()
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (string threadID in Threads.Keys)
+            lock (this.threadHandler)
             {
-                sb.Append(threadID + ". " + Threads[threadID].Title);
-                sb.AppendLine();
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (string threadID in Threads.Keys)
+                    {
+                        sb.Append(threadID + ". " + Threads[threadID].Title);
+                        sb.AppendLine();
+                    }
+                    string ans = sb.ToString();
+                    Logger.logDebug(String.Format("displayThreads ", ans));
+                    return ans;
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return null;
+                }
             }
-            string ans = sb.ToString();
-            Logger.logDebug(String.Format("displayThreads ", ans));
-            return ans;
         }
 
         public Thread SearchThread(string threadName)
         {
-            ForumSystem forumSystem = ForumSystem.initForumSystem();
-            Thread threadToFind = Threads[threadName];
-            if (threadToFind == null)
+            lock (this.threadHandler)
             {
-                Logger.logError(String.Format("Failed to recieve thread {0}", threadName));
-                return null;
-            }
-            else
-            {
-                Logger.logDebug(String.Format("find thread {1} ", threadName));
-                return threadToFind;
+                try
+                {
+                    ForumSystem forumSystem = ForumSystem.initForumSystem();
+                    Thread threadToFind = Threads[threadName];
+                    if (threadToFind == null)
+                    {
+                        Logger.logError(String.Format("Failed to recieve thread {0}", threadName));
+                        return null;
+                    }
+                    else
+                    {
+                        Logger.logDebug(String.Format("find thread {1} ", threadName));
+                        return threadToFind;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.logError(e.StackTrace);
+                    return null;
+                }
             }
         }
 
-        public void delete()
+        public bool delete()
         {
-            this.Threads = new Dictionary<string, Thread>();
-            this.Title = null;
-            this.Moderators = null;
-            this.members = new List<Member>();
-            Logger.logDebug(String.Format("subForum: {0} has been deleted", this.ID));
-            this.ID = null;
+
+            try
+            {
+                this.Threads = new Dictionary<string, Thread>();
+                this.Title = null;
+                this.Moderators = null;
+                this.members = new List<Member>();
+                Logger.logDebug(String.Format("subForum: {0} has been deleted", this.ID));
+                this.ID = null;
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
         }
     }
 }

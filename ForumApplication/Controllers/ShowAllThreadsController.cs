@@ -11,10 +11,14 @@ namespace ForumApplication.Controllers
         //
         // GET: /ShowAllThreads/
 
-        public ActionResult Index()
+        public ActionResult ShowAllThreads()
         {
             return View();
         }
 
+        public ActionResult CreateThread()
+        {
+            return View();
+        }
     }
 }

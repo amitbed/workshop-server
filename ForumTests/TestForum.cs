@@ -9,7 +9,7 @@ namespace ForumTests
     public class TestForum : ProjectTest
     {
         private Forum Dating, Food, Sport;
-        private Member Sagi, Amit, Dean;
+        private Member SagiTest, AmitTest, DeanTest;
 
 
         public override void SetUp()
@@ -23,13 +23,15 @@ namespace ForumTests
             Dating = searchForum("Dating");
             Food = searchForum("Food");
             Sport = searchForum("Sport");
-            Sagi = getMember("sagiav");
-            Amit = getMember("amitbed");
-            Dean = getMember("abadie");
+            SagiTest = getMember("sagiav");
+            AmitTest = getMember("amitbed");
+            DeanTest = getMember("abadie");
 
         }
 
         //UC1 - init Forum
+
+   //   [TestInitialize]
         [TestMethod]
         public void initForumTest()
         {
@@ -37,6 +39,7 @@ namespace ForumTests
             Assert.IsNotNull(system);
             Assert.IsNotNull(Dating);
             Assert.IsNotNull(Food);
+            Assert.IsNotNull(Sport);
             Assert.IsNotNull(Sagi);
             Assert.IsNotNull(Amit);
             Assert.IsNotNull(Dean);
@@ -49,7 +52,7 @@ namespace ForumTests
         [TestMethod]
         public void isSystemDuplicatedTest()
         {
-            Assert.AreEqual<int>(3, system.Forums.Count);
+            Assert.AreEqual<int>(4, system.Forums.Count);
         }
 
         [TestMethod]
