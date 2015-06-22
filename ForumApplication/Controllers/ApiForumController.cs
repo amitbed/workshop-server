@@ -12,6 +12,7 @@ namespace ForumApplication.Controllers
     {
         ForumSystem fs;
 
+        //returns string of all the forums
         public string Get()
         {
             fs = ForumSystem.initForumSystem();

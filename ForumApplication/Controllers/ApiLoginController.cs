@@ -10,12 +10,28 @@ namespace ForumApplication.Controllers
 {
     public class ApiLoginController : ApiController
     {
-        public void Post(List<string> args)
+        ForumSystem fs;
+        //login
+        public bool Post(List<string> args)
         {
             string username = args.ElementAt(0);
             string password = args.ElementAt(1);
             Guest guest = new Guest();
             guest.login(username, password);
+            return true;
         }
+
+        //logout
+        public bool Post(string username)
+        {
+            fs = ForumSystem.initForumSystem();
+            if (fs.Members.ContainsKey(username))
+            {
+                Member mem = fs.Members[username];
+                mem.logout();
+            }
+            return true;
+        }
+
     }
 }

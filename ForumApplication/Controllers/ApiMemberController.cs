@@ -12,12 +12,14 @@ namespace ForumApplication.Controllers
     {
         ForumSystem fs;
 
+        //return list of all the members
         public List<string> Get()
         {
             fs = ForumSystem.initForumSystem();
             return fs.displayMembers();
         }
 
+        //register new member
         public void Post(List<string> args)
         {
             string username = args.ElementAt(0);
@@ -27,6 +29,7 @@ namespace ForumApplication.Controllers
             guest.register(username, password, email);
         }
 
+        //check if user is admin in the forum
         public bool Get(List<string> args)
         {
             fs = ForumSystem.initForumSystem();
