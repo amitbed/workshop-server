@@ -27,17 +27,11 @@ namespace ForumApplication.Controllers
             List<string> admins = new List<string>();
             admins.Add(admin);
             ForumSystem fs = ForumSystem.initForumSystem();
-<<<<<<< HEAD
             Forum res = fs.createForum(title,"superAdmin", admins);
             if (res!=null)
-=======
-            Forum newForum = new Forum(title, admins);
-            bool res = fs.createForum(newForum, "");
-            //if (res)
->>>>>>> origin/master
                 return View();
-            //else
-            //    return View("OnlySuperAdmin");
+            else
+                return View("OnlySuperAdmin");
 
         }
 

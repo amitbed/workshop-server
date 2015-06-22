@@ -71,14 +71,14 @@
     <Compile Include="MessageUT.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ForumApplication\ForumApplication.csproj">
       <Project>{dc95b179-a540-43f4-9f94-87cefa0995e9}</Project>
       <Name>ForumApplication</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

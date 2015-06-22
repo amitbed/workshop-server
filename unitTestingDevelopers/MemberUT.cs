@@ -1,40 +1,63 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ForumApplication;
 using ForumApplication.Models;
-namespace unitTestingDevelopers
-{
+using System.Linq;
+using System.Collections.Generic;
+
+namespace unitTestingDevelopers{
+
     [TestClass]
     public class MemberUT
     {
         ForumSystem system = ForumSystem.initForumSystem();
+        bool isProd = false;
+
         [TestMethod]
-        public void checkMember1()
+        public void checkMemberCreationAndRemovingFromDB()
         {
-            Member CheckingMember = system.addMember("ifateli","gilAd","ifateli@bgu.ac.il");
-            Assert.IsTrue(system.Members.ContainsKey("ifateli"));
+            Member CheckingMember = system.addMember("checking","checkingPassword","checking@bgu.ac.il");
+            Assert.IsTrue(system.Members.ContainsKey("checking"));
+            Assert.IsTrue(system.repository.dbIsMemberExists("checking"));
+            system.repository.dbRemoveMember("checking", isProd);
         }
 
         [TestMethod]
-        public void checkMember2()
+        public void checkMemberCreationInDBFalseUnitTest()
         {
-            Member CheckingMember = system.addMember("ifateli", "gilAd", "ifateli@bgu.ac.il");
+            Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
             Assert.IsTrue(system.Members.ContainsValue(CheckingMember));
+            Assert.IsFalse(system.repository.dbIsMemberExists("notShouldBeInDB"));
+            system.repository.dbRemoveMember("checking", isProd);
+
         }
 
         [TestMethod]
-        public void checkMember3()
+        public void checkMemberCorrectInsertionOfEmailToDB()
         {
-            Member CheckingMember = system.addMember("ifateli", "gilAd", "ifateli@bgu.ac.il");
-            Assert.IsFalse(system.Members.ContainsKey("checking"));  
+            Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
+            var dbContext = new ForumDBContext();
+            Assert.IsTrue(dbContext.Members.Any(o => o.Email == "checking@bgu.ac.il"));
+            system.repository.dbRemoveMember("checking", isProd);
         }
 
         [TestMethod]
-        public void checkMember4()
+        public void checkMemberCorrectInserionOfPasswordToDB()
         {
-            Member CheckingMember = system.addMember("ifateli", "gilAd", "ifateli@bgu.ac.il");
-            Member BadChecking = new Member("aaa", "bbb", "ccc");
-            Assert.IsFalse(system.Members.ContainsValue(BadChecking));
+            Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
+            var dbContext = new ForumDBContext();
+            Assert.IsTrue(dbContext.Members.Any(o => o.Password == "checkingPassword"));
+            system.repository.dbRemoveMember("checking", isProd);
         }
+
+        [TestMethod]
+        public void checkMemberCorrectInsertionOfOtherFieldsToCache()
+        {
+            Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
+            string PassQues = "What is the name of your first dog?";
+
+        }
+
 
         [TestMethod]
         public void checkMemberTypeRegular()
