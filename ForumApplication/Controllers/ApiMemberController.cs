@@ -20,13 +20,22 @@ namespace ForumApplication.Controllers
         }
 
         //register new member
-        public void Post(List<string> args)
+        public bool Post(List<string> args)
         {
-            string username = args.ElementAt(0);
-            string password = args.ElementAt(1);
-            string email = args.ElementAt(2);
-            Guest guest = new Guest();
-            guest.register(username, password, email);
+            try
+            {
+                string username = args.ElementAt(0);
+                string password = args.ElementAt(1);
+                string email = args.ElementAt(2);
+                Guest guest = new Guest();
+                guest.register(username, password, email);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
         }
 
         //check if user is admin in the forum
