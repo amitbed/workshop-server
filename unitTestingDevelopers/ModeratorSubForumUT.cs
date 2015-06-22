@@ -8,8 +8,9 @@ namespace unitTestingDevelopers
     public class ModeratorSubForumUT
     {
         [TestMethod]
-        public void TestMethod1()
+        public void checkFunctionalityOfMemberSubForum()
         {
+            MemberSubForum memberSubForum = new MemberSubForum();
         }
     }
 }

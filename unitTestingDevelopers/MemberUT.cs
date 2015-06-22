@@ -54,8 +54,10 @@ namespace unitTestingDevelopers{
         public void checkMemberCorrectInsertionOfOtherFieldsToCache()
         {
             Member CheckingMember = system.addMember("checking", "checkingPassword", "checking@bgu.ac.il");
-            string PassQues = "What is the name of your first dog?";
-
+            string passQues = "What is the name of your first dog?";
+            string passAns = "Tipex";
+            CheckingMember.PasswordQuestion.Add(passQues, passAns);
+            Assert.IsNotNull(CheckingMember.PasswordQuestion);
         }
 
 
