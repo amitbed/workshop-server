@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ForumApplication;
 using ForumApplication.Models;
+using System.Data.Entity;
 
 namespace ForumTests
 {
     public class realProject : BridgeProject
     {
-     ForumSystem system = ForumSystem.initForumSystem();
+        ForumSystem system = ForumSystem.initForumSystem();
 
         public Forum createForum(string title, List<string> admins)
         {
             Forum f = new Forum(title, admins);
-            system.createForum(f);
+            system.createForum(f,"superAdmin");
             return f;
         }
 
@@ -71,14 +73,14 @@ namespace ForumTests
             return new SubForum(title, moderators, parent, maxMod);
         }
 
-        public string displaySubforums(Member member,string forumName)
+        public string displaySubforums(Member member, string forumName)
         {
             Forum f = system.enterForum(member, forumName);
             return f.displaySubforums();
         }
 
 
-        public SubForum enterSubForum(Member member,string sfName, string fName)
+        public SubForum enterSubForum(Member member, string sfName, string fName)
         {
             Forum f = system.enterForum(member, fName);
             return f.enterSubForum(sfName, member);
@@ -91,10 +93,10 @@ namespace ForumTests
             return sf.displayThreads();
         }
 
-        public void addSubForumToForumByAdmin(SubForum sf,string currForum,ModeratorSubForum arrayOfModerators)
+        public void addSubForumToForumByAdmin(SubForum sf, string currForum, ModeratorSubForum arrayOfModerators)
         {
             AdminForum f = (AdminForum)system.searchForum(currForum);
-            f.addSubForum(sf,null,null);
+            f.addSubForum(sf, null, null);
         }
 
         public string displayMessages(Member member, string threadName, string sfName, string fName)
@@ -125,6 +127,13 @@ namespace ForumTests
             Forum forum = system.searchForum(f);
             SubForum sub = forum.SearchSubForum(sf);
             return sub.isThreadExistsInSubForum(title);
+        }
+
+
+        public bool queryIsMemberExists(string guestName)
+        {
+            bool ans = system.repository.dbIsMemberExists(guestName);
+            return ans;
         }
     }
 }

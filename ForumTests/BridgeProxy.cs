@@ -170,5 +170,11 @@ namespace ForumTests
             }
             else return false;
         }
+
+
+        public bool queryIsMemberExists(string guestName)
+        {
+            return real.queryIsMemberExists(guestName);
+        }
     }
 }

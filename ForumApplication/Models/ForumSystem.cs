@@ -18,8 +18,8 @@ namespace ForumApplication.Models
         public Regex PassLimitation { get; set; }
         private long TimeToUpgrade { get; set; }
         private long MessagesToUpgrade { get; set; }
-        private ForumSystemRepository repository;
-        private ForumSystemRepository testRepository;
+        public ForumSystemRepository repository { get; set; }
+     
         bool isProd = false;
 
 
@@ -35,7 +35,7 @@ namespace ForumApplication.Models
             var DailyTime = "00:00:00";
             var timeParts = DailyTime.Split(new char[1] { ';' });
             repository = new ForumSystemRepository();
-            testRepository = new ForumSystemRepository("TestForumDBContext");
+          
         }
 
         public static ForumSystem initForumSystem()
@@ -128,7 +128,6 @@ namespace ForumApplication.Models
                 }
                 else
                 {
-                    ForumSystemRepository repository = new ForumSystemRepository();
                     repository.dbAddMember(toAdd,true);
                     Members.Add(toAdd.Username, toAdd);
                     Logger.logDebug(String.Format("A new member has been added. username: {0}, password: {1}, email: {2}", toAdd.Username, password, email));

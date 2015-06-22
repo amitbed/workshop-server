@@ -11,9 +11,9 @@ namespace ForumTests
         private BridgeProject bridge = Driver.getBridge();
         protected ForumSystem system = ForumSystem.initForumSystem();
         List<Member> testMembers = new List<Member>();
-        protected Member Sagi1;
-        protected Member Amit1;
-        protected Member Dean1;
+        protected Member Sagi;
+        protected Member Amit;
+        protected Member Dean;
         public virtual void SetUp()
         {
             setUpMembers();
@@ -22,22 +22,25 @@ namespace ForumTests
 
         private void setUpMembers()
         {
-            Sagi1 = bridge.createMember("sagiav1", "maihayafa", "sagiav@post.bgu.ac.il");
-            Amit1 = bridge.createMember("amitbed1", "ronahayafa", "amitbed@post.bgu.ac.il");
-            Dean1 = bridge.createMember("abadie1", "liatush", "abadie.post@post.bgu.ac.il");
-            testMembers.Add(Sagi1);
-            testMembers.Add(Amit1);
-            testMembers.Add(Dean1);
+            Sagi = bridge.createMember("sagiav", "maihayafa", "sagiav@post.bgu.ac.il");
+            Amit = bridge.createMember("amitbed", "ronahayafa", "amitbed@post.bgu.ac.il");
+            Dean = bridge.createMember("abadie", "liatush", "abadie.post@post.bgu.ac.il");
+            testMembers.Add(Sagi);
+            testMembers.Add(Amit);
+            testMembers.Add(Dean);
         }
 
         private void setUpForum()
         {
             List<string> adminDating = new List<string>();
-            adminDating.Add(Sagi1.Username);
+            adminDating.Add(Sagi.Username);
             List<string> adminFood = new List<string>();
-            adminFood.Add(Amit1.Username);
+            adminFood.Add(Amit.Username);
+            List<string> adminSport = new List<string>();
+            adminFood.Add(Dean.Username);
             Forum Dating = bridge.createForum("Dating", adminDating);
             Forum Food = bridge.createForum("Food", adminFood);
+            Forum Sport = bridge.createForum("Sport", adminSport);
         }
 
         public Forum createForum(string title, List<string> admins)
@@ -116,13 +119,7 @@ namespace ForumTests
         public bool isGuestRegistered(string guestName)
         {
             bool ans = false;
-            foreach (Member m in system.Members.Values)
-            {
-                if (m.Username == guestName)
-                {
-                    ans = true;
-                }
-            }
+            ans = bridge.queryIsMemberExists(guestName);
             return ans;
         }
 
