@@ -29,7 +29,6 @@ namespace ForumApplication.Controllers
                 string email = args.ElementAt(2);
                 Guest guest = new Guest();
                 guest.register(username, password, email);
-                guest.login(username, password);
                 return true;
             }
             catch (Exception e)
