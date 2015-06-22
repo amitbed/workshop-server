@@ -5,8 +5,8 @@
 <h2>ShowAllSubForums</h2>
 
 @{
-    string forum="";
-    forum = (string)this.ViewContext.RouteData.Values["id"];
+    
+    string forum = (string)this.ViewContext.RouteData.Values["id"];
      
     <p>Here are all the avialable threads</p>
     ForumApplication.Models.ForumSystem fs = ForumApplication.Models.ForumSystem.initForumSystem(); 
