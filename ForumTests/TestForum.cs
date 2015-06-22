@@ -11,7 +11,7 @@ namespace ForumTests
         private Forum Dating, Food, Sport;
         private Member Sagi, Amit, Dean;
 
-        
+
         public override void SetUp()
         {
             base.SetUp();
@@ -30,7 +30,7 @@ namespace ForumTests
         }
 
         //UC1 - init Forum
-        [TestInitialize]
+        [TestMethod]
         public void initForumTest()
         {
             SetUp();

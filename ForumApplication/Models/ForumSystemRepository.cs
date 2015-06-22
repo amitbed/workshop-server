@@ -23,8 +23,8 @@ namespace ForumApplication.Models
             string username = "dean";
             // Uses it just before any other execution.
             db.ChangeDatabaseTo(connectionString);
-            //var query = from mem in db.Members where mem.Username == username select mem;
-            //var member = query.FirstOrDefault();
+            var query = from mem in db.Members where mem.Username == username select mem;
+            var member = query.FirstOrDefault();
         }
 
         /*public void dbRetrieveLastID()

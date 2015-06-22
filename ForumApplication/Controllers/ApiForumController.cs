@@ -17,19 +17,5 @@ namespace ForumApplication.Controllers
             fs = ForumSystem.initForumSystem();
             return fs.displayForums();
         }
-
-        public void Post(List<string> args)
-        {
-            args.Reverse();
-            string title = args.First();
-            args.Remove(title);
-            string username = args.First();
-            args.Remove(username);
-            List<string> admins = args;
-            fs = ForumSystem.initForumSystem();
-            //check if there is no other forum with this name 
-            Forum forum = new Forum(title, admins);
-            fs.createForum(forum, username);
-        }
     }
 }
