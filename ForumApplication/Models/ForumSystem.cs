@@ -18,8 +18,8 @@ namespace ForumApplication.Models
         public Regex PassLimitation { get; set; }
         private long TimeToUpgrade { get; set; }
         private long MessagesToUpgrade { get; set; }
-        private ForumSystemRepository repository;
-        private ForumSystemRepository testRepository;
+        public ForumSystemRepository repository { get; set; }
+     
         bool isProd = false;
         private object forumHandler;
         private object memberHandler;
@@ -36,13 +36,15 @@ namespace ForumApplication.Models
             var DailyTime = "00:00:00";
             var timeParts = DailyTime.Split(new char[1] { ';' });
             repository = new ForumSystemRepository();
-            testRepository = new ForumSystemRepository("TestForumDBContext");
+            addMember("superAdmin", "adminPassword", "admin@email.com");
+          
         }
 
         public static ForumSystem initForumSystem()
         {
             try
             {
+<<<<<<< HEAD
                 if (forumSystem == null)
                 {
                     forumSystem = new ForumSystem();
@@ -56,13 +58,18 @@ namespace ForumApplication.Models
             {
                 Logger.logError(e.StackTrace);
                 return null;
+=======
+                forumSystem = new ForumSystem();
+                Guest superGuest = new Guest(); // check if its neccessary
+>>>>>>> origin/master
             }
         }
 
 
         //This method adds a forum to the main forum system
-        public bool createForum(Forum forum, string username)
+        public Forum createForum(string forumName, string username, List<string> adminsList)
         {
+<<<<<<< HEAD
             lock (this.forumHandler)
             {
                 try
@@ -82,13 +89,52 @@ namespace ForumApplication.Models
                     }
                     //else
                     //    return false;
+=======
+<<<<<<< HEAD
+            if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
+                if (forumName == null || adminsList == null)
+=======
+            //if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
+                if (forum == null)
+>>>>>>> origin/master
+                {
+                    Logger.logError("Failed to add a new forum. Reason: fourmName or admins list is null");
+                    return null;
+>>>>>>> origin/master
                 }
                 catch (Exception e)
                 {
+<<<<<<< HEAD
                     Logger.logError(e.StackTrace);
                     return false;
                 }
             }
+=======
+                    Forum forumToAdd = new Forum(forumName, adminsList);
+                    Forums.Add(forumName, forumToAdd);
+                    AdminsForums.Add(forumName, new AdminForum(forumToAdd));
+                    repository.dbAddForum(forumToAdd, isProd);
+                    Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forumName));
+                    return forumToAdd;
+                }
+<<<<<<< HEAD
+            else
+                return null;
+        }
+
+        public List<string> displayMembers()
+        {
+            List<string> mems = new List<string>();
+            foreach (string username in Members.Keys)
+            {
+                mems.Add(username);
+            }
+            return mems;
+=======
+            //else
+            //    return false;
+>>>>>>> origin/master
+>>>>>>> origin/master
         }
 
         public void checkMembersForUpgrade()
@@ -194,8 +240,15 @@ namespace ForumApplication.Models
                 }
                 catch (Exception e)
                 {
+<<<<<<< HEAD
                     Logger.logError(e.StackTrace);
                     return null;
+=======
+                    repository.dbAddMember(toAdd,isProd);
+                    Members.Add(toAdd.Username, toAdd);
+                    Logger.logDebug(String.Format("A new member has been added. username: {0}, password: {1}, email: {2}", toAdd.Username, password, email));
+                    return toAdd;
+>>>>>>> origin/master
                 }
             }
         }
