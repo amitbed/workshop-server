@@ -10,7 +10,7 @@ namespace ForumApplication.Models
     {
         private object messageHandler;
         //Overload Constructor
-        public Thread(string title)
+        public Thread(string title, string parent)
         {
             this.messageHandler = new object();
             if (String.IsNullOrEmpty(title))
@@ -21,6 +21,7 @@ namespace ForumApplication.Models
             {
                 this.ID = IdGen.generateThreadId();
                 this.Title = title;
+                this.Parent = parent;
                 this.Messages = new Dictionary<string, Message>();
                 Logger.logDebug(String.Format("A new thread has been created. ID: {0}, title: {1}", this.ID, this.Title));
             }
@@ -29,6 +30,7 @@ namespace ForumApplication.Models
         //Member Variables
         public string ID { get; set; }
         public string Title { get; set; }
+        public string Parent { get; set; }
         public Dictionary<string, Message> Messages { get; set; }
 
         //Method
@@ -80,8 +82,6 @@ namespace ForumApplication.Models
                             {
                                 this.Messages.Remove(m.Title);
                                 Logger.logDebug(String.Format("Message has been removed. ID:{0}", m.ID));
-                                ForumSystemRepository repository = new ForumSystemRepository();
-                                repository.dbRemoveMessage(m.ID, false);
                                 return true;
                             }
                         }

@@ -9,8 +9,9 @@ namespace ForumApplication.Models
     public class MemberSubForum : SubForum, IMemberSubForumManager
     {
         private object threadHandler;
-        private object messageHandler; 
-  
+        private object messageHandler;
+        bool isProd = false;
+
         public MemberSubForum() { }
         public MemberSubForum(string title, List<string> moderators, string parent, int maxModerators)
             : base(title, moderators, parent, maxModerators)
@@ -32,10 +33,10 @@ namespace ForumApplication.Models
                         if (threadToAdd != null)
                         {
                             threadToAdd.Messages.Add(msg.Title, msg);
+                            repository.dbAddMessage(msg, isProd);
                             Threads.Add(threadToAdd.Title, threadToAdd);
+                            repository.dbAddThread(threadToAdd, isProd);
                             Logger.logDebug(string.Format("The new thread: {0} has been created successfully with id {1}", threadToAdd.Title, threadToAdd.ID));
-                            ForumSystemRepository repository = new ForumSystemRepository();
-                            repository.dbAddThread(threadToAdd, false);
                             return true;
                         }
                         return false;
@@ -69,9 +70,8 @@ namespace ForumApplication.Models
                         Logger.logDebug(string.Format("Member: {0} increase number of published messages", username));
                         currMember.NumOfPublishedMessages++;
                         currThread.Messages.Add(msg.Title, msg);
+                        repository.dbAddMessage(msg, isProd);
                         Logger.logDebug(string.Format("Message: {0} has added to thread", msg.Title));
-                        ForumSystemRepository repository = new ForumSystemRepository();
-                        repository.dbAddMessage(msg, false);
                         return true;
                     }
                     return false;
@@ -101,6 +101,7 @@ namespace ForumApplication.Models
                         if (currThread != null)
                         {
                             currThread.Messages[ParentMsgTopic].Replies.Add(msgReply);
+                            repository.dbAddMessage(msgReply, isProd);
                             Logger.logDebug(string.Format("Message: {0} has added as reply to msg {1}", msgReply.Title, ParentMsgTopic));
                             return true;
                         }
@@ -136,9 +137,8 @@ namespace ForumApplication.Models
                         {
                             currMessage.delete();
                             currThread.Messages.Remove(messageTopic);
+                            repository.dbRemoveMessage(messageTopic, isProd);
                             Logger.logDebug(string.Format("Message: {0} was succesfully removed", messageTopic));
-                            ForumSystemRepository repository = new ForumSystemRepository();
-                            //repository.dbRemoveMessage();  WHAT TO INSERT
                             return true;
                         }
                         else
@@ -174,6 +174,7 @@ namespace ForumApplication.Models
                         if (memberUsername.Equals(currMessage.UserName))
                         {
                             currMessage.Content = msgContent;
+                            // here we need to add query for edit msg
                             Logger.logDebug(string.Format("Message: {0} was succesfully edit", msgTopic));
                             return true;
                         }

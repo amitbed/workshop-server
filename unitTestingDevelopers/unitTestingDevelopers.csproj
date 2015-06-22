@@ -69,6 +69,7 @@
     <Compile Include="ModeratorSubForumUT.cs" />
     <Compile Include="MemberSubForum.cs" />
     <Compile Include="MessageUT.cs" />
+    <Compile Include="ForumSystemRepositoryUT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

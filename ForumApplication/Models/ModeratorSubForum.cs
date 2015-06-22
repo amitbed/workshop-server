@@ -9,10 +9,14 @@ namespace ForumApplication.Models
     public class ModeratorSubForum : MemberSubForum, IModeratorManager
     {
         List<string> moderators;
+        bool isProd = false;
+        ForumSystemRepository repository;
+
         public ModeratorSubForum(string title, List<string> moderators, string parent, int maxModerators)
             : base(title, moderators, parent, maxModerators)
         {
             this.moderators = moderators;
+            this.repository = new ForumSystemRepository();
         }
 
         public bool removeThread(string threadName)
@@ -24,8 +28,7 @@ namespace ForumApplication.Models
                 {
                     currThread.delete();
                     Threads.Remove(threadName);
-                    ForumSystemRepository repository = new ForumSystemRepository();
-                    repository.dbRemoveThread(threadName, false);
+                    repository.dbRemoveThread(threadName, isProd);
                     return true;
                 }
                 return false;

@@ -11,6 +11,7 @@ namespace ForumTests
     public class realProject : BridgeProject
     {
         ForumSystem system = ForumSystem.initForumSystem();
+        bool isProd = false;
 
         public Forum createForum(string title, List<string> admins)
         {
@@ -117,7 +118,7 @@ namespace ForumTests
         {
             Forum f = system.searchForum(forumParent);
             SubForum sf = f.SearchSubForum(subForumParent);
-            return sf.createThread(title);
+            return sf.createThread(title, subForumParent);
         }
 
 
@@ -131,7 +132,7 @@ namespace ForumTests
 
         public bool queryIsMemberExists(string guestName)
         {
-            bool ans = system.repository.dbIsMemberExists(guestName);
+            bool ans = system.repository.dbIsMemberExists(guestName, isProd);
             return ans;
         }
     }

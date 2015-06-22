@@ -81,8 +81,6 @@ namespace ForumApplication.Models
                     if (reply != null)
                     {
                         Replies.Add(reply);
-                        ForumSystemRepository repository = new ForumSystemRepository();
-                        repository.dbAddMessage(reply, false);
                         Logger.logDebug(string.Format("The new reply: {0} has been created successfully with id {1}", reply.Title, reply.ID));
                         return true;
                     }
