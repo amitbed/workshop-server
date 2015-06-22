@@ -72,6 +72,8 @@ namespace ForumApplication.Models
                 {
                     Thread t = new Thread(title);
                     Threads.Add(t.Title, t);
+                    ForumSystemRepository repository = new ForumSystemRepository();
+                    repository.dbAddThread(t, false);
                     return t;
                 }
                 catch (Exception e)

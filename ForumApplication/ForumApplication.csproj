@@ -360,6 +360,7 @@
     <Content Include="Views\CreateThread\CreateThread.cshtml" />
     <Content Include="Views\CreateThread\CreateNewThread.cshtml" />
     <Content Include="Views\PostNewMessage\PostNewMessage.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

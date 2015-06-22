@@ -80,6 +80,8 @@ namespace ForumApplication.Models
                             {
                                 this.Messages.Remove(m.Title);
                                 Logger.logDebug(String.Format("Message has been removed. ID:{0}", m.ID));
+                                ForumSystemRepository repository = new ForumSystemRepository();
+                                repository.dbRemoveMessage(m.ID, false);
                                 return true;
                             }
                         }

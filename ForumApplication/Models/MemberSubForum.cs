@@ -34,6 +34,8 @@ namespace ForumApplication.Models
                             threadToAdd.Messages.Add(msg.Title, msg);
                             Threads.Add(threadToAdd.Title, threadToAdd);
                             Logger.logDebug(string.Format("The new thread: {0} has been created successfully with id {1}", threadToAdd.Title, threadToAdd.ID));
+                            ForumSystemRepository repository = new ForumSystemRepository();
+                            repository.dbAddThread(threadToAdd, false);
                             return true;
                         }
                         return false;
@@ -68,6 +70,8 @@ namespace ForumApplication.Models
                         currMember.NumOfPublishedMessages++;
                         currThread.Messages.Add(msg.Title, msg);
                         Logger.logDebug(string.Format("Message: {0} has added to thread", msg.Title));
+                        ForumSystemRepository repository = new ForumSystemRepository();
+                        repository.dbAddMessage(msg, false);
                         return true;
                     }
                     return false;
@@ -133,6 +137,8 @@ namespace ForumApplication.Models
                             currMessage.delete();
                             currThread.Messages.Remove(messageTopic);
                             Logger.logDebug(string.Format("Message: {0} was succesfully removed", messageTopic));
+                            ForumSystemRepository repository = new ForumSystemRepository();
+                            //repository.dbRemoveMessage();  WHAT TO INSERT
                             return true;
                         }
                         else

@@ -162,7 +162,7 @@ namespace ForumApplication.Models
         //        dbContext.SaveChanges();
         //    }
         //}
-
+        
         //TO DO
         public void dbRemoveSubForum(string subForumID, bool isProd)
         {
@@ -213,6 +213,12 @@ namespace ForumApplication.Models
                 }
             }
         }
+
+        public void dbAddThread(Thread t, bool isProd)
+        {
+
+        }
+
         public void cacheSubForums(Dictionary<string, SubForum> dictionary, string subForumID, bool isProd)
         {
             using (var dbContext = new ForumDBContext())
@@ -261,6 +267,11 @@ namespace ForumApplication.Models
                     dictionary.Add(m.ID, m);
                 }
             }
+        }
+
+        internal void dbRemoveThread(string threadName, bool p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

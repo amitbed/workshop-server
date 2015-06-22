@@ -57,6 +57,7 @@ namespace ForumApplication.Models
                 {
                     SubForum sf = new SubForum(title, moderators, parent, maxModerators);
                     SubForums.Add(title, sf);
+                    ForumSystemRepository repository = new ForumSystemRepository();
                     return sf;
                 }
                 catch (Exception e)

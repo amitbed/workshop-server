@@ -24,6 +24,8 @@ namespace ForumApplication.Models
                 {
                     currThread.delete();
                     Threads.Remove(threadName);
+                    ForumSystemRepository repository = new ForumSystemRepository();
+                    repository.dbRemoveThread(threadName, false);
                     return true;
                 }
                 return false;
