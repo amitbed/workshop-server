@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "ShowAllThreads";
+}
+<head>
+    <title>Threads</title>
+    <link rel="stylesheet" type="text/css" href="Threads.css">
+    <script src="ThreadJS.js"></script>
+</head>
+<h2>ShowAllThreads</h2>
+@{
+    string all= (string)this.ViewContext.RouteData.Values["id"];
+    string [] all2= all.Split(' ');
+    string forum = all2[0];
+    string subForum = all2[1];
+    
+    <p>Here are all the avialable threads</p>
+    
+    ForumApplication.Models.ForumSystem fs = ForumApplication.Models.ForumSystem.initForumSystem();
+    Dictionary<string,ForumApplication.Models.Thread> threads = fs.Forums[forum].SubForums[subForum].Threads;
+
+    foreach (ForumApplication.Models.Thread thread in threads.Values)
+    {
+            @Html.ActionLink(thread.Title, "ShowAllMessages", "ShowAllMessages", new { id = all + " " + thread.Title }, null);
+    }
+            @Html.ActionLink("Create a new Thread", "CreateThread", "CreateThread", new { id = "guest" }, null); 
+    }
