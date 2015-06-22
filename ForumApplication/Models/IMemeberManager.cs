@@ -8,6 +8,6 @@ namespace ForumApplication.Models
 {
     interface IMemeberManager
     {
-        void logout();
+        bool logout();
     }
 }

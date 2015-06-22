@@ -8,6 +8,6 @@ namespace ForumApplication.Models
 {
     interface IModeratorManager
     {
-        void removeThread(string threadName);
+        bool removeThread(string threadName);
     }
 }

@@ -43,3 +43,5 @@ C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\bin\Debug\D
 C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.csprojResolveAssemblyReference.cache
 C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.dll
 C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.pdb
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.dll

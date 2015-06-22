@@ -44,7 +44,6 @@ namespace ForumApplication.Models
         {
             try
             {
-<<<<<<< HEAD
                 if (forumSystem == null)
                 {
                     forumSystem = new ForumSystem();
@@ -58,83 +57,38 @@ namespace ForumApplication.Models
             {
                 Logger.logError(e.StackTrace);
                 return null;
-=======
-                forumSystem = new ForumSystem();
-                Guest superGuest = new Guest(); // check if its neccessary
->>>>>>> origin/master
             }
         }
-
 
         //This method adds a forum to the main forum system
         public Forum createForum(string forumName, string username, List<string> adminsList)
         {
-<<<<<<< HEAD
             lock (this.forumHandler)
             {
                 try
                 {
                     //if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
-                    if (forum == null)
+                    if (forumName == null)
                     {
                         Logger.logError("Failed to add a new forum. Reason: forum is null");
-                        return false;
+                        return null;
                     }
                     else
                     {
-                        Forums.Add(forum.Title, forum);
-                        AdminsForums.Add(forum.Title, new AdminForum(forum));
-                        Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forum.ID, forum.Title));
-                        return true;
+                        Forum forumToAdd = new Forum(forumName, adminsList);
+                        Forums.Add(forumName, forumToAdd);
+                        AdminsForums.Add(forumName, new AdminForum(forumToAdd));
+                        repository.dbAddForum(forumToAdd, isProd);
+                        Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forumName));
+                        return forumToAdd;
                     }
-                    //else
-                    //    return false;
-=======
-<<<<<<< HEAD
-            if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
-                if (forumName == null || adminsList == null)
-=======
-            //if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
-                if (forum == null)
->>>>>>> origin/master
-                {
-                    Logger.logError("Failed to add a new forum. Reason: fourmName or admins list is null");
-                    return null;
->>>>>>> origin/master
                 }
                 catch (Exception e)
                 {
-<<<<<<< HEAD
                     Logger.logError(e.StackTrace);
-                    return false;
+                    return null;
                 }
             }
-=======
-                    Forum forumToAdd = new Forum(forumName, adminsList);
-                    Forums.Add(forumName, forumToAdd);
-                    AdminsForums.Add(forumName, new AdminForum(forumToAdd));
-                    repository.dbAddForum(forumToAdd, isProd);
-                    Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forumName));
-                    return forumToAdd;
-                }
-<<<<<<< HEAD
-            else
-                return null;
-        }
-
-        public List<string> displayMembers()
-        {
-            List<string> mems = new List<string>();
-            foreach (string username in Members.Keys)
-            {
-                mems.Add(username);
-            }
-            return mems;
-=======
-            //else
-            //    return false;
->>>>>>> origin/master
->>>>>>> origin/master
         }
 
         public void checkMembersForUpgrade()
@@ -154,6 +108,17 @@ namespace ForumApplication.Models
                 }
             }
         }
+        public List<string> displayMembers()
+        {
+            List<string> mems = new List<string>();
+            foreach (string username in Members.Keys)
+            {
+                mems.Add(username);
+            }
+            return mems;
+            //else
+            //    return false;
+        }
 
         //This method displays all the forums in the system
         public string displayForums()
@@ -168,27 +133,6 @@ namespace ForumApplication.Models
                         res = res + " " + forumName;
                     }
                     return res;
-                }
-                catch (Exception e)
-                {
-                    Logger.logError(e.StackTrace);
-                    return null;
-                }
-            }
-        }
-
-        public List<string> displayMembers()
-        {
-            lock (this.memberHandler)
-            {
-                try
-                {
-                    List<string> mems = new List<string>();
-                    foreach (string username in Members.Keys)
-                    {
-                        mems.Add(username);
-                    }
-                    return mems;
                 }
                 catch (Exception e)
                 {
@@ -240,15 +184,8 @@ namespace ForumApplication.Models
                 }
                 catch (Exception e)
                 {
-<<<<<<< HEAD
                     Logger.logError(e.StackTrace);
                     return null;
-=======
-                    repository.dbAddMember(toAdd,isProd);
-                    Members.Add(toAdd.Username, toAdd);
-                    Logger.logDebug(String.Format("A new member has been added. username: {0}, password: {1}, email: {2}", toAdd.Username, password, email));
-                    return toAdd;
->>>>>>> origin/master
                 }
             }
         }

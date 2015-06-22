@@ -14,7 +14,7 @@ namespace ForumTests
 
         public Forum createForum(string title, List<string> admins)
         {
-            Forum f = system.createForum(title, "superAdmin", admins);
+            Forum f = system.createForum(title, "", admins);
             return f;
         }
 

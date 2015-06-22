@@ -111,9 +111,10 @@ namespace ForumApplication.Models
             }
 
         }
-        public void fileComplaint(string moderatorUsername, string memberUsername)
+        public bool fileComplaint(string moderatorUsername, string memberUsername)
         {
             //TODO: add implementation
+            return true;
         }
 
         public bool removeMessage(string memberUsername, string threadName, string messageTopic)

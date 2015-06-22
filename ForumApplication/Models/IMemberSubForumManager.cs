@@ -8,11 +8,11 @@ namespace ForumApplication.Models
 {
     interface IMemberSubForumManager
     {
-        void createThread(Message msg, string threadToAddName);
-        void addMessage(Message msg, string relatedThreadName);
-        void addReply(Message msgReply, string ParentMsgTopic, string threadName);
-        void fileComplaint(string moderatorUsername, string memberUsername);
-        void removeMessage(string memberUsername, string threadName, string messageTopic);
-        void editMessage(string memberUsername, string msgTopic, string msgContent, string threadName);
+        bool createThread(Message msg, string threadToAddName);
+        bool addMessage(Message msg, string relatedThreadName);
+        bool addReply(Message msgReply, string ParentMsgTopic, string threadName);
+        bool fileComplaint(string moderatorUsername, string memberUsername);
+        bool removeMessage(string memberUsername, string threadName, string messageTopic);
+        bool editMessage(string memberUsername, string msgTopic, string msgContent, string threadName);
     }
 }

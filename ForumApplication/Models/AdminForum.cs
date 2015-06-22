@@ -114,7 +114,7 @@ namespace ForumApplication.Models
             }
         }
 
-        public void downgradeMember(string memberID)
+        public bool downgradeMember(string memberID)
         {
             try
             {
