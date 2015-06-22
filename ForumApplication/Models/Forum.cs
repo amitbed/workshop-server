@@ -160,6 +160,24 @@ namespace ForumApplication.Models
                 return null;
             }
         }
+
+        public bool addAdminToForum(string admin)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(admin))
+                {
+                    this.Admins.Add(admin);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Logger.logError(e.StackTrace);
+                return false;
+            }
+        }
     }
         #endregion
 }

@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminForum.cs" />
+    <Compile Include="Controllers\ApiLogoutController.cs" />
     <Compile Include="Models\ConnectionStringExtension.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\ForumDBContext.cs" />

@@ -58,7 +58,7 @@ namespace ForumApplication.Models
                         Member member = forumSystem.Members[username];
                         if (String.Equals(username, member.Username) && String.Equals(password, member.Password))
                         {
-                            Logger.logDebug(String.Format("Member: usernamer:{1} has logged in", member.Username));
+                            Logger.logDebug(String.Format("Member: usernamer:{0} has logged in", member.Username));
                             return username;
                         }
                         else

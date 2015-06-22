@@ -580,4 +580,3 @@ C:\Users\ifat\Desktop\Project1\workshop-server\ForumApplication\obj\Release\Foru
 \\psf\Home\Desktop\workshop-server\ForumApplication\bin\zh-Hant\System.Spatial.resources.dll
 \\psf\Home\Desktop\workshop-server\ForumApplication\obj\Release\ForumApplication.dll
 \\psf\Home\Desktop\workshop-server\ForumApplication\obj\Release\ForumApplication.pdb
-\\psf\Home\Desktop\workshop-server\ForumApplication\obj\Release\ForumApplication.csprojResolveAssemblyReference.cache

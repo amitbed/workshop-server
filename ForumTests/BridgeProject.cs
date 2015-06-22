@@ -46,6 +46,5 @@ namespace ForumTests
         bool IsSubForumExists(string subForumName, string forumName);
         bool queryIsMemberExists(string guestName);
 
-
     }
 }

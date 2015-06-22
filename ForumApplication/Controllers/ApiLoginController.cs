@@ -28,16 +28,7 @@ namespace ForumApplication.Controllers
         }
 
         //logout
-        public bool Post(string username)
-        {
-            fs = ForumSystem.initForumSystem();
-            if (fs.Members.ContainsKey(username))
-            {
-                Member mem = fs.Members[username];
-                mem.logout();
-            }
-            return true;
-        }
+       
 
     }
 }

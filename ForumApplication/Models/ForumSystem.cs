@@ -37,12 +37,12 @@ namespace ForumApplication.Models
             var DailyTime = "00:00:00";
             var timeParts = DailyTime.Split(new char[1] { ';' });
             repository = new ForumSystemRepository();
-            addMember("superAdmin", "adminPassword", "admin@email.com");
-          
+            addMember("superAdmin", "adminPassword", "admin@email.com");  
         }
 
         public static ForumSystem initForumSystem()
         {
+
             try
             {
                 if (forumSystem == null)
