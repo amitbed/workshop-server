@@ -123,3 +123,6 @@ C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\DotNetOpenAu
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\obj\Debug\ForumTests.csprojResolveAssemblyReference.cache
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\obj\Debug\ForumTests.dll
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\obj\Debug\ForumTests.pdb
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\obj\Debug\ForumTests.csprojResolveAssemblyReference.cache
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\obj\Debug\ForumTests.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\obj\Debug\ForumTests.pdb

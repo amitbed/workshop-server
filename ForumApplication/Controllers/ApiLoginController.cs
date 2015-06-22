@@ -34,30 +34,5 @@ namespace ForumApplication.Controllers
                 return false;
             }
         }
-
-        //logout
-<<<<<<< HEAD
-       
-=======
-        public bool Post(string username)
-        {
-            try
-            {
-                fs = ForumSystem.initForumSystem();
-                if (fs.Members.ContainsKey(username))
-                {
-                    Member mem = fs.Members[username];
-                    mem.logout();
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                Logger.logError(e.StackTrace);
-                return false;
-            }
-        }
->>>>>>> origin/master
-
     }
 }
