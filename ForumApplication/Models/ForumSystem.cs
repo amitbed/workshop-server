@@ -35,6 +35,7 @@ namespace ForumApplication.Models
             var DailyTime = "00:00:00";
             var timeParts = DailyTime.Split(new char[1] { ';' });
             repository = new ForumSystemRepository();
+            addMember("superAdmin", "adminPassword", "admin@email.com");
           
         }
 
@@ -43,8 +44,6 @@ namespace ForumApplication.Models
             if (forumSystem == null)
             {
                 forumSystem = new ForumSystem();
-                //hread checkMembers = new Thread(checkMembersForUpgrade);
-                //checkMembers.Start();
                 Guest superGuest = new Guest(); // check if its neccessary
             }
             return forumSystem;
@@ -52,23 +51,35 @@ namespace ForumApplication.Models
 
 
         //This method adds a forum to the main forum system
-        public bool createForum(Forum forum, string username)
+        public Forum createForum(string forumName, string username, List<string> adminsList)
         {
             if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
-                if (forum == null)
+                if (forumName == null || adminsList == null)
                 {
-                    Logger.logError("Failed to add a new forum. Reason: forum is null");
-                    return false;
+                    Logger.logError("Failed to add a new forum. Reason: fourmName or admins list is null");
+                    return null;
                 }
                 else
                 {
-                    Forums.Add(forum.Title, forum);
-                    AdminsForums.Add(forum.Title, new AdminForum(forum));
-                    Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forum.ID, forum.Title));
-                    return true;
+                    Forum forumToAdd = new Forum(forumName, adminsList);
+                    Forums.Add(forumName, forumToAdd);
+                    AdminsForums.Add(forumName, new AdminForum(forumToAdd));
+                    repository.dbAddForum(forumToAdd, isProd);
+                    Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forumName));
+                    return forumToAdd;
                 }
             else
-                return false;
+                return null;
+        }
+
+        public List<string> displayMembers()
+        {
+            List<string> mems = new List<string>();
+            foreach (string username in Members.Keys)
+            {
+                mems.Add(username);
+            }
+            return mems;
         }
 
         public void checkMembersForUpgrade()
@@ -128,7 +139,7 @@ namespace ForumApplication.Models
                 }
                 else
                 {
-                    repository.dbAddMember(toAdd,true);
+                    repository.dbAddMember(toAdd,isProd);
                     Members.Add(toAdd.Username, toAdd);
                     Logger.logDebug(String.Format("A new member has been added. username: {0}, password: {1}, email: {2}", toAdd.Username, password, email));
                     return toAdd;

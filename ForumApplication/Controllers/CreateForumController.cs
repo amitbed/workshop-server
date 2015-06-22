@@ -28,9 +28,8 @@ namespace ForumApplication.Controllers
             List<string> admins = new List<string>();
             admins.Add(admin);
             ForumSystem fs = ForumSystem.initForumSystem();
-            Forum newForum = new Forum(title, admins);
-            bool res = fs.createForum(newForum, id);
-            if (res)
+            Forum res = fs.createForum(title,"superAdmin", admins);
+            if (res!=null)
                 return View();
             else
                 return View("OnlySuperAdmin");
