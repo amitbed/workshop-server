@@ -30,9 +30,9 @@ C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\DotNetOpenAu
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OAuth.dll
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.dll
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OpenId.dll
-C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\ForumApplication.pdb
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\EntityFramework.xml
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\ForumApplication.pdb
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\System.Web.Mvc.xml
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\System.Web.Http.xml
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\bin\Debug\System.Web.Http.WebHost.xml
@@ -49,4 +49,3 @@ C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\obj\Debug\ForumTests.c
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\obj\Debug\ForumTests.dll
 C:\Users\ifat\Desktop\Project1\workshop-server\ForumTests\obj\Debug\ForumTests.pdb
 \\psf\Home\Desktop\workshop-server\ForumTests\obj\Debug\ForumTests.csprojResolveAssemblyReference.cache
-\\psf\Home\Desktop\workshop-server\ForumTests\obj\Debug\ForumTests.dll

@@ -43,5 +43,16 @@ C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\bin\Debug\D
 C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.csprojResolveAssemblyReference.cache
 C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.dll
 C:\Users\ifat\Desktop\Project1\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.pdb
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\EntityFramework.dll
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\EntityFramework.SqlServer.dll
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\ForumApplication.dll
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\Microsoft.Web.WebPages.OAuth.dll
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\EntityFramework.xml
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\EntityFramework.SqlServer.xml
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\Microsoft.Web.WebPages.OAuth.xml
 \\psf\Home\Desktop\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.csprojResolveAssemblyReference.cache
 \\psf\Home\Desktop\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.dll
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\obj\Debug\unitTestingDevelopers.pdb
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\unitTestingDevelopers.dll.config
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\unitTestingDevelopers.dll
+\\psf\Home\Desktop\workshop-server\unitTestingDevelopers\bin\Debug\unitTestingDevelopers.pdb

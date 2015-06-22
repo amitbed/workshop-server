@@ -30,6 +30,8 @@ namespace ForumTests
         }
 
         //UC1 - init Forum
+
+   //   [TestInitialize]
         [TestMethod]
         public void initForumTest()
         {

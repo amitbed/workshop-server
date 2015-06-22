@@ -27,6 +27,7 @@ namespace ForumApplication.Models
         //Constructor
         private ForumSystem()
         {
+            this.memberHandler = new object();
             this.forumHandler = new object();
             Logger log = new Logger();
             Members = new Dictionary<string, Member>();
