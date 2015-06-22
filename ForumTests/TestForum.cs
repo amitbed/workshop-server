@@ -14,7 +14,9 @@ namespace ForumTests
 
         public override void SetUp()
         {
-
+            var dbContext = new ForumDBContext();
+            dbContext.ChangeDatabaseTo("TestForumDBContext");
+            dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [TableName]");
             base.SetUp();
             setUpForum();
         }
