@@ -26,5 +26,19 @@ namespace ForumApplication.Controllers
             Guest guest = new Guest();
             guest.register(username, password, email);
         }
+
+        public bool Get(List<string> args)
+        {
+            fs = ForumSystem.initForumSystem();
+            string username = args.ElementAt(0);
+            string forumTitle = args.ElementAt(1);
+            if(fs.Members.ContainsKey(username)){
+                Member mem = fs.Members[username];
+                return (mem.MyForums.Contains(forumTitle));
+            }
+            else{
+                return false;
+            }
+        }
     }
 }
