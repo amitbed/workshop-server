@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ForumApplication;
 using ForumApplication.Models;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace unitTestingDevelopers
 {
@@ -38,23 +37,6 @@ namespace unitTestingDevelopers
             Assert.IsTrue(dbContext.Messages.Any(o => o.Title == "Message2"));
             dbContext.ChangeDatabaseTo("TestForumDBContext");
             Assert.IsTrue(dbContext.Messages.Any(o => o.Title == "Message1"));
-        }
-
-        [TestMethod]
-        public void checkRemoveForum()
-        {
-            var dbContext = new ForumDBContext();
-            List<string> admins = new List<string>();
-            admins.Add("abadie");
-            admins.Add("amitbed");
-            Forum forum = new Forum("removeForum", admins);
-            Forum forum2 = new Forum("removeForum2", admins);
-            system.repository.dbAddForum(forum, false);
-            system.repository.dbAddForum(forum2, false);
-            dbContext.ChangeDatabaseTo("TestForumDBContext");
-            Assert.IsTrue(dbContext.Forums.Any(o => o.Title == "removeForum"));
-            system.repository.dbRemoveForum("removeForum", false);
-            Assert.IsFalse(dbContext.Forums.Any(o => o.Title == "removeForum"));
         }
     }
 }

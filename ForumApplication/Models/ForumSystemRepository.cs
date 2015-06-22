@@ -64,22 +64,6 @@ namespace ForumApplication.Models
             }
         }
 
-        public void dbRemoveForum(string forumName, bool isProd)
-        {
-            using (var dbContext = new ForumDBContext())
-            {
-                if (!isProd)
-                {
-                    dbContext.ChangeDatabaseTo("TestForumDBContext");
-                }
-                var forum = (from f in dbContext.Forums
-                             where f.Title == forumName
-                             select f).FirstOrDefault();
-                dbContext.Forums.Remove(forum);
-                dbContext.SaveChanges();
-            }
-        }
-
         public void dbRemoveMessage(string messageID, bool isProd)
         {
             using (var dbContext = new ForumDBContext())
@@ -174,6 +158,21 @@ namespace ForumApplication.Models
         }
 
         //TO DO
+        public void dbRemoveForum(string forumTitle, bool isProd)
+        {
+            using (var dbContext = new ForumDBContext())
+            {
+                if (!isProd)
+                {
+                    dbContext.ChangeDatabaseTo("TestForumDBContext");
+                }
+                var forum = (from f in dbContext.Forums
+                             where f.Title == forumTitle
+                             select f).FirstOrDefault();
+                dbContext.Forums.Remove(forum);
+                dbContext.SaveChanges();
+            }
+        }
 
         //FIX
         //public void dbAddSubForum(SubForum subForum, ForumSubforumIntermediate intermediate, bool isProd)
