@@ -8,23 +8,14 @@ using ForumApplication.Models;
 
 namespace ForumApplication.Controllers
 {
-    public class ApiMemberController : ApiController
+    public class ApiLoginController : ApiController
     {
-        ForumSystem fs;
-
-        public List<string> Get()
-        {
-            fs = ForumSystem.initForumSystem();
-            return fs.displayMembers();
-        }
-
         public void Post(List<string> args)
         {
             string username = args.ElementAt(0);
             string password = args.ElementAt(1);
-            string email = args.ElementAt(2);
             Guest guest = new Guest();
-            guest.register(username, password, email);
+            guest.login(username, password);
         }
     }
 }
