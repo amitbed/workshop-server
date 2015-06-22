@@ -176,5 +176,46 @@ namespace ForumTests
         {
             return real.queryIsMemberExists(guestName);
         }
+
+
+        public Message createMessage(Member member, string msgTitle,string content, string threadName, string sfName, string fName)
+        {
+            return real.createMessage(member,msgTitle,content, threadName, sfName, fName);
+        }
+
+        public bool isAdminInForum(string forumName, string memberUsername)
+        {
+            return real.isAdminInForum(forumName, memberUsername);
+        }
+
+
+
+        public Member searchMember(string username)
+        {
+            return real.searchMember(username);
+        }
+
+        public void addAdminToForum(string forumName, string memberUsername)
+        {
+            real.addAdminToForum(forumName, memberUsername);
+        }
+
+        public bool addModeratorToSubForum(string forumName, string subForumName, string moderatorUsername)
+        {
+            return real.addModeratorToSubForum(forumName, subForumName, moderatorUsername);
+        }
+
+
+
+        //public void addSubForumToForumByAdmin(string forumName, string memberUsername)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+        public void removeForum(string forumToDelete)
+        {
+            real.removeForum(forumToDelete);
+        }
     }
 }

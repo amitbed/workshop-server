@@ -84,6 +84,15 @@ namespace ForumApplication.Models
             }
         }
 
+        public Message createMessage(string title, string content, string username, string threadName)
+        {
+            Message msg = new Message(title, content, username);
+            bool create = addMessage(msg, threadName);
+            if (create == true)
+                return msg;
+            return null;
+        }
+
         public bool addReply(Message msgReply, string ParentMsgTopic, string threadName)
         {
             lock (messageHandler)

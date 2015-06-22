@@ -37,6 +37,8 @@ namespace ForumApplication.Models
             var DailyTime = "00:00:00";
             var timeParts = DailyTime.Split(new char[1] { ';' });
             repository = new ForumSystemRepository();
+            repository.cacheForums(Forums, isProd);
+            repository.cacheMembers(Members, isProd);
             addMember("superAdmin", "adminPassword", "admin@email.com");
           
         }
@@ -76,6 +78,7 @@ namespace ForumApplication.Models
                     }
                     else
                     {
+                        adminsList.Add("superAdmin");
                         Forum forumToAdd = new Forum(forumName, adminsList);
                         Forums.Add(forumName, forumToAdd);
                         AdminsForums.Add(forumName, new AdminForum(forumToAdd));
@@ -263,6 +266,13 @@ namespace ForumApplication.Models
                     return null;
                 }
             }
+        }
+
+        public void removeForum(string forumName, bool isProd)
+        {
+            var item = Forums.First(kvp => kvp.Value.Title == forumName);
+            Forums.Remove(item.Key);
+            repository.dbRemoveForum(forumName, isProd);
         }
 
         public Forum enterForum(Member member, string forumName)

@@ -67,6 +67,15 @@ namespace ForumApplication.Models
 
 
         //Methods
+        public bool addModerator(string memberUsername)
+        {
+            if (Moderators.Count < MaxModerators)
+            {
+                Moderators.Add(memberUsername);
+                return true;
+            }
+            else return false;
+        }
 
 
         public Thread createThread(string title, string parent)
