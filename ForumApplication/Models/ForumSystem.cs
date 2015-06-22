@@ -53,8 +53,13 @@ namespace ForumApplication.Models
         //This method adds a forum to the main forum system
         public Forum createForum(string forumName, string username, List<string> adminsList)
         {
+<<<<<<< HEAD
             if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
                 if (forumName == null || adminsList == null)
+=======
+            //if (username.Equals(ForumApplication.Models.ForumSystem.superadmin))
+                if (forum == null)
+>>>>>>> origin/master
                 {
                     Logger.logError("Failed to add a new forum. Reason: fourmName or admins list is null");
                     return null;
@@ -68,6 +73,7 @@ namespace ForumApplication.Models
                     Logger.logDebug(String.Format("A new forum has been added to forum system. ID: {0}, Title: {1}", forumName));
                     return forumToAdd;
                 }
+<<<<<<< HEAD
             else
                 return null;
         }
@@ -80,6 +86,10 @@ namespace ForumApplication.Models
                 mems.Add(username);
             }
             return mems;
+=======
+            //else
+            //    return false;
+>>>>>>> origin/master
         }
 
         public void checkMembersForUpgrade()
@@ -110,7 +120,17 @@ namespace ForumApplication.Models
             }
             return res;
         }
-        
+
+        public List<string> displayMembers()
+        {
+            List<string> mems = new List<string>();
+            foreach (string username in Members.Keys)
+            {
+                mems.Add(username);
+            }
+            return mems;
+        }
+
         public Member addMember(string username, string password, string email)
         {
             if ((String.IsNullOrEmpty(username)) || (String.IsNullOrEmpty(password)) || (String.IsNullOrEmpty(email)))

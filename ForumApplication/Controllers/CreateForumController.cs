@@ -10,29 +10,34 @@ namespace ForumApplication.Controllers
 {
     public class CreateForumController : Controller
     {
-        public ActionResult CreateForum(string id)
+        public ActionResult CreateForum()
         {
-            if (ForumApplication.Models.ForumSystem.superadmin.Equals(id))
+            //if (ForumApplication.Models.ForumSystem.superadmin.Equals(id))
                 return View();
-            else
-                return View("../OnlySuperAdmin");
+            ////else
+            ////    return View("../OnlySuperAdmin");
         }
     
 
-        [HttpGet]
         [HttpPost]
-        public ActionResult CreateNewForum(string id)
+        public ActionResult CreateNewForum()
         {
             string title = Request["Forumtitle"].ToString();
             string admin = Request["adminUserName"].ToString();
             List<string> admins = new List<string>();
             admins.Add(admin);
             ForumSystem fs = ForumSystem.initForumSystem();
+<<<<<<< HEAD
             Forum res = fs.createForum(title,"superAdmin", admins);
             if (res!=null)
+=======
+            Forum newForum = new Forum(title, admins);
+            bool res = fs.createForum(newForum, "");
+            //if (res)
+>>>>>>> origin/master
                 return View();
-            else
-                return View("OnlySuperAdmin");
+            //else
+            //    return View("OnlySuperAdmin");
 
         }
 
