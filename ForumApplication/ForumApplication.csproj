@@ -187,6 +187,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AllForumsController.cs" />
+    <Compile Include="Controllers\ApiForumController.cs" />
+    <Compile Include="Controllers\ApiMemberController.cs" />
     <Compile Include="Controllers\CreateForumController.cs" />
     <Compile Include="Controllers\CreateSubForumController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
