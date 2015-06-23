@@ -237,7 +237,8 @@ namespace ForumApplication.Models
                             select m;
                 foreach (var m in query)
                 {
-                    dictionary.Add(m.Username, m);
+                    if(!dictionary.ContainsKey(m.Username))
+                        dictionary.Add(m.Username, m);
                 }
             }
         }
@@ -253,7 +254,8 @@ namespace ForumApplication.Models
                             select f;
                 foreach (var f in query)
                 {
-                    dictionary.Add(f.ID, f);
+                    if (!dictionary.ContainsKey(f.Title))
+                        dictionary.Add(f.ID, f);
                     //cacheSubForums(f.SubForums,f,isProd);
                 }
             }

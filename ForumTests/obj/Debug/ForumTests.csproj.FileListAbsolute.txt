@@ -35,3 +35,40 @@ C:\Users\נופר\Documents\GitHub\workshop-server\ForumTests\bin\Debug\DotNetOp
 C:\Users\נופר\Documents\GitHub\workshop-server\ForumTests\obj\Debug\ForumTests.csprojResolveAssemblyReference.cache
 C:\Users\נופר\Documents\GitHub\workshop-server\ForumTests\obj\Debug\ForumTests.dll
 C:\Users\נופר\Documents\GitHub\workshop-server\ForumTests\obj\Debug\ForumTests.pdb
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\ForumTests.dll.config
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\ForumTests.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\ForumTests.pdb
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\EntityFramework.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\ForumApplication.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Mvc.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Http.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Optimization.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\Microsoft.Web.WebPages.OAuth.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.AspNet.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.Core.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OAuth.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OpenId.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\ForumApplication.pdb
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\EntityFramework.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Mvc.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Http.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\Microsoft.Web.WebPages.OAuth.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.AspNet.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.Core.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OAuth.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\bin\Debug\DotNetOpenAuth.OpenId.xml
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\obj\Debug\ForumTests.csprojResolveAssemblyReference.cache
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\obj\Debug\ForumTests.dll
+C:\Users\Amit\Documents\university\שנה ג\סמסטר ו\סדנא\workshop-mvc\workshop-server\ForumTests\obj\Debug\ForumTests.pdb

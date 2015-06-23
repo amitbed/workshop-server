@@ -28,10 +28,10 @@ namespace ForumApplication.Controllers
             admins.Add(admin);
             ForumSystem fs = ForumSystem.initForumSystem();
             Forum res = fs.createForum(title, "superAdmin", admins);
-            if (res != null)
+            //if (res != null)
                 return View();
-            else
-                return View("OnlySuperAdmin");
+            //else
+            //    return View("OnlySuperAdmin");
         }
     }
 }
