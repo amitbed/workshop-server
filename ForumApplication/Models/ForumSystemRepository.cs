@@ -96,8 +96,11 @@ namespace ForumApplication.Models
                 {
                     dbContext.ChangeDatabaseTo("TestForumDBContext");
                 }
-                dbContext.Members.Add(member);
-                dbContext.SaveChanges();
+                if (!dbContext.Members.Any(m => m.Username == member.Username))
+                {
+                    dbContext.Members.Add(member);
+                    dbContext.SaveChanges();
+                }
             }
         }
 
